@@ -10,24 +10,32 @@ import Foundation
 typealias MovieID = Int
 typealias TVShowID = Int
 
+struct TrendingJSONData: Decodable {
+   let totalResults: Int?
+   let totalPages: Int?
+   let page: Int?
+   let results: [TrendingMedia]?
+}
+
 class NetworkManager {
    
    func fetchTrending(mediaType: MediaType,
                       timeWindow: TimeWindow,
-                      completion: @escaping (Result<[TrendingMedia],NSBError>) -> Void) {
+                      completion: @escaping (Result<TrendingJSONData,NSBError>) -> Void) {
       
       URLSession.shared.request(.trendingMedia(mediaType: mediaType,
                                                timeWindow: timeWindow)) { data, response, error in
-         guard let data = data else {
+         guard let jsonData = data else {
             completion(.failure(.fetchError(error!)))
             return
          }
+
          do {
-            let trending = try self.decode(jsonData: data, to: [TrendingMedia].self)
-            completion(.success(trending))
+            let trendingData = try self.decode(jsonData: jsonData, to: TrendingJSONData.self)
+            completion(.success(trendingData))
          }
-         catch {
-            completion(.failure(.decodeError("FetchTrending")))
+         catch let error {
+            completion(.failure(.decodeError(error)))
          }
       }
    }
@@ -41,8 +49,8 @@ class NetworkManager {
          do {
             let movie = try self.decode(jsonData: data, to: Movie.self)
             completion(.success(movie))
-         } catch {
-            completion(.failure(.decodeError("FetchMovie")))
+         } catch let error {
+            completion(.failure(.decodeError(error)))
          }
       }
    }
@@ -56,8 +64,8 @@ class NetworkManager {
          let output = try decoder.decode(T.self, from: data)
          return output
       }
-      catch {
-         throw NSBError.decodeError("DecodeJSON")
+      catch let error {
+         throw NSBError.decodeError(error)
       }
    }
 }

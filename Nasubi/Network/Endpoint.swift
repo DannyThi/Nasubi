@@ -17,7 +17,7 @@ extension Endpoint {
    }
    
    static func trendingMedia(mediaType: MediaType, timeWindow: TimeWindow) -> Self {
-      Endpoint(path: "trending/\(mediaType.rawValue)/\(timeWindow.rawValue)?\(Self.apikey)")
+      Endpoint(path: "trending/\(mediaType.rawValue)/\(timeWindow.rawValue)")
    }
 }
 
@@ -27,17 +27,19 @@ struct Endpoint {
             let key = try? String(contentsOfFile: file, encoding: .utf8) else {
          fatalError("Could not get api key")
       }
-      return "api_key=" + key
+      return key
    }
    
    var path: String
-   var queryItems: [URLQueryItem] = []
+   var queryItems: [URLQueryItem] = [
+      URLQueryItem(name: "api_key", value: Self.apikey)
+   ]
    
    var url: URL {
       var components = URLComponents()
       components.scheme = "https"
-      components.host = "api.themoviedb.org/3/"
-      components.path = "/" + path
+      components.host = "api.themoviedb.org"
+      components.path = "/3/" + path
       components.queryItems = queryItems
       
       guard let url = components.url else {

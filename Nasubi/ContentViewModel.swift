@@ -18,13 +18,18 @@ class ContentViewModel: ObservableObject {
    
    
    func fetchTrendingData() {
-      networkManager.fetchTrending(mediaType: .all, timeWindow: .week) { result in
-         switch result {
-         case let .failure(error):
-            print(error.description)
-         case let .success(trendingData):
-            self.trending = trendingData
+      networkManager.fetchTrending(mediaType: .all, timeWindow: .day) { result in
+         DispatchQueue.main.async {
+            switch result {
+            case let .failure(error):
+               print(error.description)
+            case let .success(trendingJSONData):
+               if let trendingResults = trendingJSONData.results {
+                  self.trending = trendingResults
+               }
+            }
          }
+
       }
    }
    

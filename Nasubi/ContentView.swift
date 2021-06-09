@@ -18,7 +18,7 @@ struct ContentView: View {
    var body: some View {
       VStack {
          ForEach(viewModel.trending, id: \.id) { data in
-            Text(data.title)
+            Text(data.title ?? "Hi")
          }
       }.onAppear {
          viewModel.fetchTrendingData()

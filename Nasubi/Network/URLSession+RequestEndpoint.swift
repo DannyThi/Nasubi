@@ -12,7 +12,6 @@ extension URLSession {
    
    @discardableResult
    func request(_ endpoint: Endpoint, completion handler: @escaping CompletionHandler) -> URLSessionDataTask {
-      print(endpoint.url)
       let task = self.dataTask(with: endpoint.url, completionHandler: handler)
       task.resume()
       return task
