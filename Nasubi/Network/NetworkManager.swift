@@ -19,17 +19,13 @@ struct TrendingJSONData: Decodable {
 
 class NetworkManager {
    
-   func fetchTrending(mediaType: MediaType,
-                      timeWindow: TimeWindow,
+   func fetchTrending(mediaType: MediaType, timeWindow: TimeWindow,
                       completion: @escaping (Result<TrendingJSONData,NSBError>) -> Void) {
-      
-      URLSession.shared.request(.trendingMedia(mediaType: mediaType,
-                                               timeWindow: timeWindow)) { data, response, error in
+      URLSession.shared.request(.trendingMedia(mediaType: mediaType, timeWindow: timeWindow)) { data, response, error in
          guard let jsonData = data else {
             completion(.failure(.fetchError(error!)))
             return
          }
-
          do {
             let trendingData = try self.decode(jsonData: jsonData, to: TrendingJSONData.self)
             completion(.success(trendingData))
@@ -40,7 +36,7 @@ class NetworkManager {
       }
    }
    
-   func fetchMovie(id: MovieID, completion: @escaping (Result<Movie,NSBError>) -> Void) {
+   func fetchMovie(byId id: MovieID, completion: @escaping (Result<Movie,NSBError>) -> Void) {
       URLSession.shared.request(.movie(withId: id)) { data, response, error in
          guard let data = data else {
             completion(.failure(.fetchError(error!)))

@@ -7,15 +7,6 @@
 
 import Foundation
 
-protocol MediaProtocol: Decodable {
-   var id: Int { get }
-}
-
-struct Genre: Identifiable, Decodable {
-   var id: Int
-   var name: String
-}
-
 struct ProductionCompany: Identifiable, Decodable {
    var name: String
    var id: Int

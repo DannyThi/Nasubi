@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  HomeViewModel.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/07.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ContentViewModel: ObservableObject {
+class HomeViewModel: ObservableObject {
    @Published var trending: [TrendingMedia] = []
    
    private let networkManager: NetworkManager
@@ -16,9 +16,8 @@ class ContentViewModel: ObservableObject {
       self.networkManager = networkManager
    }
    
-   
-   func fetchTrendingData() {
-      networkManager.fetchTrending(mediaType: .all, timeWindow: .day) { result in
+   func fetchTrendingData(mediaType: MediaType, timeWindow: TimeWindow) {
+      networkManager.fetchTrending(mediaType: mediaType, timeWindow: timeWindow) { result in
          DispatchQueue.main.async {
             switch result {
             case let .failure(error):
@@ -29,7 +28,6 @@ class ContentViewModel: ObservableObject {
                }
             }
          }
-
       }
    }
    

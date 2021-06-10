@@ -31,9 +31,7 @@ struct Endpoint {
    }
    
    var path: String
-   var queryItems: [URLQueryItem] = [
-      URLQueryItem(name: "api_key", value: Self.apikey)
-   ]
+   var queryItems: [URLQueryItem] = []
    
    var url: URL {
       var components = URLComponents()
@@ -41,10 +39,13 @@ struct Endpoint {
       components.host = "api.themoviedb.org"
       components.path = "/3/" + path
       components.queryItems = queryItems
+      components.queryItems!.append(URLQueryItem(name: "api_key", value: Self.apikey))
       
       guard let url = components.url else {
          preconditionFailure("Invalid URL components: \(components)")
       }
+      
+      print(url)
       return url
    }
 }

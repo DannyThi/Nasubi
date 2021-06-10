@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct NasubiApp: App {
    
-   private let contentViewModel = ContentViewModel(networkManager: NetworkManager())
+   private let contentViewModel = HomeViewModel(networkManager: NetworkManager())
    
    var body: some Scene {
       WindowGroup {
-         ContentView(viewModel: contentViewModel)
+         HomeView(viewModel: contentViewModel)
       }
    }
 }

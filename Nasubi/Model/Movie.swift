@@ -7,32 +7,47 @@
 
 import Foundation
 
-struct Movie: MediaProtocol, Decodable {
-   var adult: Bool
-   var backdropPath: String?
-   var belongsToCollection: Bool? // this might error
-   var budget: Int
-   var genres: [Genre]
-   var homepage: String?
+struct Movie: Decodable {
+   
+   private var title: String
+   private var originalTitle: String
+
    var id: Int
-   var imdbId: String?
-   var originalLanguage: String
-   var originalTitle: String
+
+   var itemTitle: String { title }
+   var originalItemTitle: String { originalTitle }
+   
+   // DETAILS
    var overview: String?
-   var popularity: Float
-   var posterPath: String?
+   var tagline: String?
+   var originalLanguage: String
+   var spokenLanguages: [SpokenLanguage]
+   var runtime: Int?
+
+   // SECONDARY DETAILS
+   var genres: [Genre]
+   var releaseDate: String
+   var video: Bool
+   var adult: Bool
+   var belongsToCollection: Bool? // this might error
+
+   // PRODUCTION
    var productionCompanies: [ProductionCompany]
    var productionCountries: [ProductionCountries]
-   var releaseDate: String
-   var revenue: Int
-   var runtime: Int?
-   var spokenLanguages: [SpokenLanguage]
    var status: MediaStatus
-   var tagline: String?
-   var title: String
-   var video: Bool
-   var voteAverage: Float
+   var budget: Int
+   var revenue: Int
+
+   // RATINGS
+   var popularity: Float
    var voteCount: Int
+   var voteAverage: Float
+   
+   // LINKS
+   var imdbId: String?
+   var homepage: String?
+   var posterPath: String?
+   var backdropPath: String?
 }
    
 
