@@ -66,6 +66,11 @@ class NetworkManager {
    }
 }
 
+//static func imagePathfor(imagePath: String) -> String {
+//   let components = URLComponents()
+//   components.scheme = ""
+//}
+
 enum MediaType: String {
    case all, movie, tvshow, person
 }

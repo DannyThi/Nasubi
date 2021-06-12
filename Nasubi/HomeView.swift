@@ -17,11 +17,10 @@ struct HomeView: View {
    
    var body: some View {
       NavigationView {
-         VStack {
+         List {
             Section(header: Text("Trending Movies")) {
                Movies
-            }
-            Spacer()
+            }.edgesIgnoringSafeArea(.horizontal)
          }
          .navigationBarTitle("Trending")
          .onAppear {
@@ -32,13 +31,11 @@ struct HomeView: View {
    
    var Movies: some View {
       ScrollView(.horizontal) {
-         Group {
-            HStack(spacing: 10) {
-               ForEach(viewModel.trending, id: \.id) { item in
-                  MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
-               }
+         HStack(spacing: 10) {
+            ForEach(viewModel.trending, id: \.id) { item in
+               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
             }
-         }.padding()
+         }
       }
    }
    
@@ -50,11 +47,10 @@ struct MediaItemCell: View {
    
    var body: some View {
       NavigationLink(destination: Text(mediaItem.itemTitle)) {
-         VStack {
+         VStack(alignment: .leading) {
             
             //IMAGE
-            Image("placeholder")
-               .resizable()
+            AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w300))
                .frame(width: 160, height: 220)
                .cornerRadius(20)
             
@@ -76,11 +72,9 @@ struct MediaItemCell: View {
                   .lineLimit(2)
                Spacer()
             }
-            Spacer()
          }
          .frame(width: 160, height: 300)
-         .accentColor(Color(UIColor.label))
-         .border(Color.black)
+//         .accentColor(Color(UIColor.label))
       }
    }
    
