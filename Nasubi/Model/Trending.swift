@@ -1,5 +1,5 @@
 //
-//  NetworkStructs.swift
+//  Trending.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/08.
