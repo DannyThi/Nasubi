@@ -12,7 +12,7 @@ struct Trending {
       let totalResults: Int?
       let totalPages: Int?
       let page: Int?
-      let results: [TrendingMovie]?
+      let results: [Trending.Movie]?
    }
 }
 

@@ -1,5 +1,5 @@
 //
-//  TrendingTVShow.swift
+//  Trending.TVShow.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/13.

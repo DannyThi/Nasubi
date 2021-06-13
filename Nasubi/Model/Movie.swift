@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Decodable {
+struct Movie_: Decodable {
    
    private var title: String
    private var originalTitle: String
@@ -50,7 +50,7 @@ struct Movie: Decodable {
    var backdropPath: String?
 }
 
-extension Movie {
+extension Movie_ {
    struct ProductionCompany: Identifiable, Decodable {
       var name: String
       var id: Int

@@ -8,9 +8,9 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-   @Published var trendingMovies: [TrendingMovie] = []
-   @Published var trendingTvShows: [TrendingMovie] = []
-   @Published var trendingPersons: [TrendingMovie] = []
+   @Published var trendingMovies: [Trending.Movie] = []
+   @Published var trendingTvShows: [Trending.Movie] = []
+   @Published var trendingPersons: [Trending.Movie] = []
    
    private let networkManager: NetworkManager
    

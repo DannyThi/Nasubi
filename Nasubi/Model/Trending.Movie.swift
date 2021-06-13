@@ -1,5 +1,5 @@
 //
-//  TrendingMedia.swift
+//  Trending.Movie.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/08.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-//extension Trending {
-   struct Trending.Movie: Decodable {
+extension Trending {
+   struct Movie: Decodable {
       private var title: String?
       private var originalTitle: String?
       private var name: String?
@@ -35,4 +35,4 @@ import Foundation
       var posterPath: String?
       var backdropPath: String?
    }
-//}
+}

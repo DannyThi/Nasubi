@@ -30,14 +30,14 @@ class NetworkManager {
       }
    }
    
-   func fetchMovie(byId id: MovieID, completion: @escaping (Result<Movie,NSBError>) -> Void) {
+   func fetchMovie(byId id: MovieID, completion: @escaping (Result<Movie_,NSBError>) -> Void) {
       URLSession.shared.request(.movie(withId: id)) { data, response, error in
          guard let data = data else {
             completion(.failure(.fetchError(error!)))
             return
          }
          do {
-            let movie = try self.decode(jsonData: data, to: Movie.self)
+            let movie = try self.decode(jsonData: data, to: Movie_.self)
             completion(.success(movie))
          } catch let error {
             completion(.failure(.decodeError(error)))
