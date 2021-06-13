@@ -18,7 +18,7 @@ class HomeViewModel: ObservableObject {
       self.networkManager = networkManager
    }
    
-   func fetchTrendingData(mediaType: MediaType, timeWindow: TimeWindow) {
+   func fetchTrendingData(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) {
       networkManager.fetchTrending(mediaType: mediaType, timeWindow: timeWindow) { result in
          DispatchQueue.main.async {
             switch result {

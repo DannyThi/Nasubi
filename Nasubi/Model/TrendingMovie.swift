@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct TrendingMovie:TrendingMediaProtocol, Decodable {
+struct TrendingMovie: Decodable {
    private var title: String?
    private var originalTitle: String?
    private var name: String?
    private var originalName: String?
    
    var id: Int
-   var mediaType: MediaType
+   var mediaType: Trending.MediaType
    
    var itemTitle: String { title ?? name ?? "No name or title." }
    var originalItemTitle: String { originalTitle ?? originalName ?? "No original name or title." }

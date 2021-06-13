@@ -16,7 +16,7 @@ extension Endpoint {
       Endpoint(path: "tvshows/\(id)")
    }
    
-   static func trendingMedia(mediaType: MediaType, timeWindow: TimeWindow) -> Self {
+   static func trendingMedia(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) -> Self {
       Endpoint(path: "trending/\(mediaType.rawValue)/\(timeWindow.rawValue)")
    }
 }

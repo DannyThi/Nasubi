@@ -13,7 +13,7 @@ typealias TVShowID = Int
 
 class NetworkManager {
    
-   func fetchTrending(mediaType: MediaType, timeWindow: TimeWindow,
+   func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResposnse,NSBError>) -> Void) {
       URLSession.shared.request(.trendingMedia(mediaType: mediaType, timeWindow: timeWindow)) { data, response, error in
          guard let jsonData = data else {
