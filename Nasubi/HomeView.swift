@@ -17,75 +17,50 @@ struct HomeView: View {
    
    var body: some View {
       NavigationView {
-         List {
-            Section(header: Text("Trending Movies")) {
-               Movies
-            }.edgesIgnoringSafeArea(.horizontal)
+         VStack(alignment: .leading) {
+            Text("Movies")
+               .font(.title2)
+            Movies
+            Text("TV Shows")
+            TVShows
+            Spacer()
          }
          .navigationBarTitle("Trending")
          .onAppear {
             viewModel.fetchTrendingData(mediaType: .movie, timeWindow: .week)
+            viewModel.fetchTrendingData(mediaType: .tv, timeWindow: .week)
+            viewModel.fetchTrendingData(mediaType: .person, timeWindow: .week)
          }
       }
    }
    
    var Movies: some View {
-      ScrollView(.horizontal) {
-         HStack(spacing: 10) {
-            ForEach(viewModel.trending, id: \.id) { item in
-               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
-            }
+      HorizontalScrollView {
+         ForEach(viewModel.trendingMovies, id: \.id) { item in
+            MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
          }
       }
    }
    
-}
-
-struct MediaItemCell: View {
-   
-   @Binding var mediaItem: TrendingMedia
-   
-   var body: some View {
-      NavigationLink(destination: Text(mediaItem.itemTitle)) {
-         VStack(alignment: .leading) {
-            
-            //IMAGE
-            AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w300))
-               .frame(width: 160, height: 220)
-               .cornerRadius(20)
-            
-            // TITLE
-            HStack {
-               Text(mediaItem.itemTitle)
-                  .font(.title3)
-                  .fontWeight(.semibold)
-                  .foregroundColor(Color(UIColor.label))
-                  .padding(.bottom, 1)
-               Spacer()
-            }
-            
-            // GENRE
-            HStack {
-               Genres(mediaItem.genreIds)
-                  .font(.footnote)
-                  .foregroundColor(Color(UIColor.secondaryLabel))
-                  .lineLimit(2)
-               Spacer()
-            }
+   var TVShows: some View {
+      HorizontalScrollView {
+         ForEach(viewModel.trendingTvShows, id: \.id) { item in
+            MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
          }
-         .frame(width: 160, height: 300)
-//         .accentColor(Color(UIColor.label))
       }
    }
    
    @ViewBuilder
-   private func Genres(_ genres: [Genre]) -> some View {
-      let output = genres.map { $0.title.capitalized }.joined(separator: ", ")
-      Text(output)
+   private func scrollViewBuilder(for content: AnyView) -> some View {
+      ScrollView(.horizontal) {
+         HStack(spacing: 10) {
+            content
+         }
+         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+      }
    }
+   
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

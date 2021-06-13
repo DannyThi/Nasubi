@@ -8,7 +8,9 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-   @Published var trending: [TrendingMedia] = []
+   @Published var trendingMovies: [TrendingMovie] = []
+   @Published var trendingTvShows: [TrendingMovie] = []
+   @Published var trendingPersons: [TrendingMovie] = []
    
    private let networkManager: NetworkManager
    
@@ -24,7 +26,19 @@ class HomeViewModel: ObservableObject {
                print(error.description)
             case let .success(trendingJSONData):
                if let trendingResults = trendingJSONData.results {
-                  self.trending = trendingResults
+                  switch mediaType {
+                  case .movie:
+                     self.trendingMovies = trendingResults
+                  case .tv:
+                     print("TV Shows: \(trendingResults)")
+                     self.trendingTvShows = trendingResults
+                  case .person:
+                     print("Persons: \(trendingResults)")
+                     self.trendingPersons = trendingResults
+                  default:
+                     // Not handling this case.
+                     break
+                  }
                }
             }
          }

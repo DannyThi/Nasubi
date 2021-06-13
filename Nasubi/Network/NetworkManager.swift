@@ -10,12 +10,6 @@ import Foundation
 typealias MovieID = Int
 typealias TVShowID = Int
 
-struct TrendingJSONData: Decodable {
-   let totalResults: Int?
-   let totalPages: Int?
-   let page: Int?
-   let results: [TrendingMedia]?
-}
 
 class NetworkManager {
    
@@ -64,17 +58,4 @@ class NetworkManager {
          throw NSBError.decodeError(error)
       }
    }
-}
-
-//static func imagePathfor(imagePath: String) -> String {
-//   let components = URLComponents()
-//   components.scheme = ""
-//}
-
-enum MediaType: String {
-   case all, movie, tvshow, person
-}
-
-enum TimeWindow: String {
-   case day, week
 }

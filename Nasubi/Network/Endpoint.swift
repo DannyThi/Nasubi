@@ -45,6 +45,7 @@ struct Endpoint {
          preconditionFailure("Invalid URL components: \(components)")
       }
       
+      print(url)
       return url
    }
 }

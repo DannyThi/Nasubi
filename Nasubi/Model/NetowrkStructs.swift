@@ -1,11 +1,18 @@
 //
-//  MediaProtocol.swift
+//  NetworkStructs.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/08.
 //
 
 import Foundation
+
+struct TrendingJSONData: Decodable {
+   let totalResults: Int?
+   let totalPages: Int?
+   let page: Int?
+   let results: [TrendingMovie]?
+}
 
 struct ProductionCompany: Identifiable, Decodable {
    var name: String
@@ -33,3 +40,4 @@ enum MediaStatus: String, Decodable {
    case Released = "Released"
    case Canceled = "Canceled"
 }
+
