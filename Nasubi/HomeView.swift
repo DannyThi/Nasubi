@@ -17,17 +17,16 @@ struct HomeView: View {
    
    var body: some View {
       NavigationView {
-         VStack(alignment: .leading) {
-            Text("Movies")
-               .font(.title2)
-            Movies
-            Text("TV Shows")
-            TVShows
-            Spacer()
-         }
-         .navigationBarTitle("Trending")
-         .onAppear {
-            viewModel.fetchTrendingData(mediaType: .all, timeWindow: .week)
+         ScrollView(.vertical) {
+            VStack(alignment: .leading) {
+               Text("Movies")
+                  .font(.title2)
+               Movies
+               Text("TV Shows")
+               TVShows
+               Spacer()
+            }
+            .navigationBarTitle("Trending")
          }
       }
    }

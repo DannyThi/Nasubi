@@ -12,12 +12,15 @@ class HomeViewModel: ObservableObject {
    @Published var trendingTvShows: [Trending.MediaItem] = []
    @Published var trendingPersons: [Trending.MediaItem] = []
    
-   @Published var trending: [Trending.MediaItem] = []
+   @Published var trending: Set<Trending.MediaItem> = []
    
    private let networkManager: NetworkManager
    
    init(networkManager: NetworkManager) {
       self.networkManager = networkManager
+      self.fetchTrendingData(mediaType: .movie, timeWindow: .week)
+      self.fetchTrendingData(mediaType: .tv, timeWindow: .week)
+      self.fetchTrendingData(mediaType: .person, timeWindow: .week)
    }
    
    func fetchTrendingData(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) {
@@ -28,33 +31,11 @@ class HomeViewModel: ObservableObject {
                print(NSBError.decodeError(error))
             case let .success(response):
                let results = response.results
-               self.trending = results
+               self.trending.insert(results)
             }
          }
       }
    }
-   
-
-   
 }
 
 
-//            switch networkResponse {
-//            case let .failure(error):
-//               print(error.description)
-//            case let .success(networkResponse):
-//               let data = networkResponse.results
-////               if let networkResponseData = networkResponseData.results {
-//                  switch mediaType {
-//                  case .movie:
-//                     self.trendingMovies = data as! [Trending.Movie]
-//                  case .tv:
-//                     self.trendingTvShows = data as! [Trending.TVShow]
-//                  case .person:
-//                     self.trendingPersons = data as! [Trending.Person]
-//                  default:
-//                     // Not handling this case.
-//                     break
-//                  }
-////               }
-//            }

@@ -9,7 +9,7 @@ import Foundation
 
 extension Trending {
 
-   struct MediaItem: Decodable {
+   struct MediaItem: Decodable, Hashable {
       
       private var title: String?
       private var originalTitle: String?

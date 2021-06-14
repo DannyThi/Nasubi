@@ -9,6 +9,7 @@ import Foundation
 
 extension Trending {
    
+   @available(*, deprecated, message: "Use MediaItem instead")
    struct Movie: AnyMediaItem, Decodable {
       private var title: String?
       private var originalTitle: String?

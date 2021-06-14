@@ -8,6 +8,8 @@
 import Foundation
 
 extension Trending {
+   
+   @available(*, deprecated, message: "Use MediaItem instead")
    struct Person: AnyMediaItem, Decodable {
       var id: Int
       

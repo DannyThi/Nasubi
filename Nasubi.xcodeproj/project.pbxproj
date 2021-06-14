@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9731F59C26772B7D001CF5D8 /* SetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9731F59B26772B7D001CF5D8 /* SetExtension.swift */; };
 		975107752674612D00E69481 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975107742674612D00E69481 /* HorizontalScrollView.swift */; };
 		975107772675AC6100E69481 /* Trending.TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975107762675AC6100E69481 /* Trending.TVShow.swift */; };
 		9751077D2676D11700E69481 /* Trending.Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9751077C2676D11700E69481 /* Trending.Person.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9731F59B26772B7D001CF5D8 /* SetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetExtension.swift; sourceTree = "<group>"; };
 		975107742674612D00E69481 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		975107762675AC6100E69481 /* Trending.TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trending.TVShow.swift; sourceTree = "<group>"; };
 		9751077C2676D11700E69481 /* Trending.Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trending.Person.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				9779B8E5266D94F5008FE873 /* NasubiApp.swift */,
 				9779B90D266DF643008FE873 /* NSBError.swift */,
+				9731F59B26772B7D001CF5D8 /* SetExtension.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				9751077D2676D11700E69481 /* Trending.Person.swift in Sources */,
 				9779B91C2672114E008FE873 /* MovieDBConfiguration.swift in Sources */,
 				9779B8F5266D98B6008FE873 /* Movie.swift in Sources */,
+				9731F59C26772B7D001CF5D8 /* SetExtension.swift in Sources */,
 				9779B91A2672012C008FE873 /* AsyncImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
