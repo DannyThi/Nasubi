@@ -7,12 +7,18 @@
 
 import Foundation
 
-struct Trending {
-   struct NetworkResposnse: Decodable {
+protocol AnyMediaItem: Decodable {
+   var id: Int { get }
+   var mediaType: Trending.MediaType { get }
+}
+
+struct Trending: Decodable {
+   
+   struct NetworkResponse: Decodable {
       let totalResults: Int?
       let totalPages: Int?
       let page: Int?
-      let results: [Trending.Movie]?
+      let results: [MediaItem]
    }
 }
 

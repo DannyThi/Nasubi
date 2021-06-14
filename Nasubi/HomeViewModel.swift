@@ -8,9 +8,11 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-   @Published var trendingMovies: [Trending.Movie] = []
-   @Published var trendingTvShows: [Trending.Movie] = []
-   @Published var trendingPersons: [Trending.Movie] = []
+   @Published var trendingMovies: [Trending.MediaItem] = []
+   @Published var trendingTvShows: [Trending.MediaItem] = []
+   @Published var trendingPersons: [Trending.MediaItem] = []
+   
+   @Published var trending: [Trending.MediaItem] = []
    
    private let networkManager: NetworkManager
    
@@ -19,27 +21,14 @@ class HomeViewModel: ObservableObject {
    }
    
    func fetchTrendingData(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) {
-      networkManager.fetchTrending(mediaType: mediaType, timeWindow: timeWindow) { result in
+      networkManager.fetchTrending(mediaType: mediaType, timeWindow: timeWindow) { networkResponse in
          DispatchQueue.main.async {
-            switch result {
+            switch networkResponse {
             case let .failure(error):
-               print(error.description)
-            case let .success(trendingJSONData):
-               if let trendingResults = trendingJSONData.results {
-                  switch mediaType {
-                  case .movie:
-                     self.trendingMovies = trendingResults
-                  case .tv:
-                     print("TV Shows: \(trendingResults)")
-                     self.trendingTvShows = trendingResults
-                  case .person:
-                     print("Persons: \(trendingResults)")
-                     self.trendingPersons = trendingResults
-                  default:
-                     // Not handling this case.
-                     break
-                  }
-               }
+               print(NSBError.decodeError(error))
+            case let .success(response):
+               let results = response.results
+               self.trending = results
             }
          }
       }
@@ -48,3 +37,24 @@ class HomeViewModel: ObservableObject {
 
    
 }
+
+
+//            switch networkResponse {
+//            case let .failure(error):
+//               print(error.description)
+//            case let .success(networkResponse):
+//               let data = networkResponse.results
+////               if let networkResponseData = networkResponseData.results {
+//                  switch mediaType {
+//                  case .movie:
+//                     self.trendingMovies = data as! [Trending.Movie]
+//                  case .tv:
+//                     self.trendingTvShows = data as! [Trending.TVShow]
+//                  case .person:
+//                     self.trendingPersons = data as! [Trending.Person]
+//                  default:
+//                     // Not handling this case.
+//                     break
+//                  }
+////               }
+//            }

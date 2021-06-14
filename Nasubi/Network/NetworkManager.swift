@@ -14,15 +14,15 @@ typealias TVShowID = Int
 class NetworkManager {
    
    func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
-                      completion: @escaping (Result<Trending.NetworkResposnse,NSBError>) -> Void) {
+                      completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {
       URLSession.shared.request(.trendingMedia(mediaType: mediaType, timeWindow: timeWindow)) { data, response, error in
          guard let jsonData = data else {
             completion(.failure(.fetchError(error!)))
             return
          }
          do {
-            let trendingData = try self.decode(jsonData: jsonData, to: Trending.NetworkResposnse.self)
-            completion(.success(trendingData))
+            let networkResponse = try self.decode(jsonData: jsonData, to: Trending.NetworkResponse.self)
+            completion(.success(networkResponse))
          }
          catch let error {
             completion(.failure(.decodeError(error)))

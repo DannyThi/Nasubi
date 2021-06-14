@@ -1,15 +1,16 @@
 //
-//  Trending.Movie.swift
+//  Trending.MediaItem.swift
 //  Nasubi
 //
-//  Created by Hai Long Danny Thi on 2021/06/08.
+//  Created by Hai Long Danny Thi on 2021/06/14.
 //
 
 import Foundation
 
 extension Trending {
-   
-   struct Movie: AnyMediaItem, Decodable {
+
+   struct MediaItem: Decodable {
+      
       private var title: String?
       private var originalTitle: String?
       private var name: String?
@@ -25,15 +26,26 @@ extension Trending {
       var originalLanguage: String
       
       var genreIds: [Genre]
-      var releaseDate: String
-      var video: Bool?
-      var adult: Bool
-      
+
       var popularity: Float
       var voteCount: Int
       var voteAverage: Float
       
       var posterPath: String?
       var backdropPath: String?
+      
+      // MOVIE
+      var releaseDate: String?
+      var video: Bool?
+      var adult: Bool?
+      
+      // TV
+      var firstAirDate: String?
+      var originCountry: [String]?
+
+      // PERSON
+      var gender: String?
+      var knownFor: [MediaItem]?
+      var knownForDepartment: String?
    }
 }

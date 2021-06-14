@@ -27,16 +27,14 @@ struct HomeView: View {
          }
          .navigationBarTitle("Trending")
          .onAppear {
-            viewModel.fetchTrendingData(mediaType: .movie, timeWindow: .week)
-            viewModel.fetchTrendingData(mediaType: .tv, timeWindow: .week)
-            viewModel.fetchTrendingData(mediaType: .person, timeWindow: .week)
+            viewModel.fetchTrendingData(mediaType: .all, timeWindow: .week)
          }
       }
    }
    
    var Movies: some View {
       HorizontalScrollView {
-         ForEach(viewModel.trendingMovies, id: \.id) { item in
+         ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
             MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
          }
       }
@@ -44,7 +42,7 @@ struct HomeView: View {
    
    var TVShows: some View {
       HorizontalScrollView {
-         ForEach(viewModel.trendingTvShows, id: \.id) { item in
+         ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
             MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
          }
       }

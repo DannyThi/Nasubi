@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MediaItemCell: View {
-   @Binding var mediaItem: Trending.Movie
+   @Binding var mediaItem: Trending.MediaItem
    
    var body: some View {
       NavigationLink(destination: Text(mediaItem.itemTitle)) {

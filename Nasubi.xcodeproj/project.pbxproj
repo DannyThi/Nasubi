@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		975107752674612D00E69481 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975107742674612D00E69481 /* HorizontalScrollView.swift */; };
 		975107772675AC6100E69481 /* Trending.TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975107762675AC6100E69481 /* Trending.TVShow.swift */; };
+		9751077D2676D11700E69481 /* Trending.Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9751077C2676D11700E69481 /* Trending.Person.swift */; };
+		9751077F2676E62A00E69481 /* Trending.MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9751077E2676E62A00E69481 /* Trending.MediaItem.swift */; };
 		9779B8E6266D94F5008FE873 /* NasubiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9779B8E5266D94F5008FE873 /* NasubiApp.swift */; };
 		9779B8E8266D94F5008FE873 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9779B8E7266D94F5008FE873 /* HomeView.swift */; };
 		9779B8EA266D94F6008FE873 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9779B8E9266D94F6008FE873 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 /* Begin PBXFileReference section */
 		975107742674612D00E69481 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		975107762675AC6100E69481 /* Trending.TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trending.TVShow.swift; sourceTree = "<group>"; };
+		9751077C2676D11700E69481 /* Trending.Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trending.Person.swift; sourceTree = "<group>"; };
+		9751077E2676E62A00E69481 /* Trending.MediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trending.MediaItem.swift; sourceTree = "<group>"; };
 		9779B8E2266D94F5008FE873 /* Nasubi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nasubi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9779B8E5266D94F5008FE873 /* NasubiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasubiApp.swift; sourceTree = "<group>"; };
 		9779B8E7266D94F5008FE873 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -157,8 +161,10 @@
 			children = (
 				9779B8F4266D98B6008FE873 /* Movie.swift */,
 				9779B915266F9147008FE873 /* Trending.swift */,
+				9751077E2676E62A00E69481 /* Trending.MediaItem.swift */,
 				9779B913266F912D008FE873 /* Trending.Movie.swift */,
 				975107762675AC6100E69481 /* Trending.TVShow.swift */,
+				9751077C2676D11700E69481 /* Trending.Person.swift */,
 				9779B9172671ACBB008FE873 /* Genre.swift */,
 			);
 			path = Model;
@@ -274,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9779B911266DFE05008FE873 /* HomeViewModel.swift in Sources */,
+				9751077F2676E62A00E69481 /* Trending.MediaItem.swift in Sources */,
 				9779B8F7266D9EB6008FE873 /* NetworkManager.swift in Sources */,
 				9779B914266F912D008FE873 /* Trending.Movie.swift in Sources */,
 				9779B9182671ACBB008FE873 /* Genre.swift in Sources */,
@@ -287,6 +294,7 @@
 				9779B8E8266D94F5008FE873 /* HomeView.swift in Sources */,
 				9779B909266DEB47008FE873 /* Endpoint.swift in Sources */,
 				9779B8E6266D94F5008FE873 /* NasubiApp.swift in Sources */,
+				9751077D2676D11700E69481 /* Trending.Person.swift in Sources */,
 				9779B91C2672114E008FE873 /* MovieDBConfiguration.swift in Sources */,
 				9779B8F5266D98B6008FE873 /* Movie.swift in Sources */,
 				9779B91A2672012C008FE873 /* AsyncImageView.swift in Sources */,
