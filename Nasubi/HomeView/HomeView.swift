@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
    
    @ObservedObject var viewModel: HomeViewModel
-   
+      
    init(viewModel: HomeViewModel) {
       self.viewModel = viewModel
    }
@@ -27,6 +27,9 @@ struct HomeView: View {
                Spacer()
             }
             .navigationBarTitle("Trending")
+            .onAppear {
+               
+            }
          }
       }
    }

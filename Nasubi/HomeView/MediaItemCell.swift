@@ -15,7 +15,8 @@ struct MediaItemCell: View {
          VStack {
             //IMAGE
             AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w300))
-               .frame(width: 160, height: 220)
+               .frame(width: 160)
+               .aspectRatio(0.669, contentMode: .fit)
                .cornerRadius(20)
             
             // TITLE
@@ -38,7 +39,7 @@ struct MediaItemCell: View {
             }
             Spacer()
          }
-         .frame(width: 160, height: 300)
+         .frame(width: 160, height: 340)
 //         .accentColor(Color(UIColor.label))
       }
    }

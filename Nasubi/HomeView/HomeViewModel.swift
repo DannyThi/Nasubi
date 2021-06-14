@@ -8,19 +8,18 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-   @Published var trendingMovies: [Trending.MediaItem] = []
-   @Published var trendingTvShows: [Trending.MediaItem] = []
-   @Published var trendingPersons: [Trending.MediaItem] = []
-   
    @Published var trending: Set<Trending.MediaItem> = []
    
    private let networkManager: NetworkManager
-   
+   private var timeWindow: Trending.TimeWindow = .week {
+      didSet {
+         self.updateData()
+      }
+   }
+
    init(networkManager: NetworkManager) {
       self.networkManager = networkManager
-      self.fetchTrendingData(mediaType: .movie, timeWindow: .week)
-      self.fetchTrendingData(mediaType: .tv, timeWindow: .week)
-      self.fetchTrendingData(mediaType: .person, timeWindow: .week)
+      self.updateData()
    }
    
    func fetchTrendingData(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) {
@@ -35,6 +34,21 @@ class HomeViewModel: ObservableObject {
             }
          }
       }
+   }
+   
+   func toggleTimeWindow() {
+      self.timeWindow = timeWindow == .week ? .day : .week
+   }
+   
+   private func refreshData() {
+      self.trending = []
+      self.updateData()
+   }
+   
+   private func updateData() {
+      self.fetchTrendingData(mediaType: .movie, timeWindow: timeWindow)
+      self.fetchTrendingData(mediaType: .tv, timeWindow: timeWindow)
+      self.fetchTrendingData(mediaType: .person, timeWindow: timeWindow)
    }
 }
 

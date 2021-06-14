@@ -92,6 +92,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9731F59D2677360F001CF5D8 /* Trending */ = {
+			isa = PBXGroup;
+			children = (
+				9779B915266F9147008FE873 /* Trending.swift */,
+				9751077E2676E62A00E69481 /* Trending.MediaItem.swift */,
+				9779B913266F912D008FE873 /* Trending.Movie.swift */,
+				975107762675AC6100E69481 /* Trending.TVShow.swift */,
+				9751077C2676D11700E69481 /* Trending.Person.swift */,
+			);
+			path = Trending;
+			sourceTree = "<group>";
+		};
+		9731F59E2677375C001CF5D8 /* SupportViews */ = {
+			isa = PBXGroup;
+			children = (
+				9779B9192672012C008FE873 /* AsyncImageView.swift */,
+			);
+			path = SupportViews;
+			sourceTree = "<group>";
+		};
+		9731F59F2677376A001CF5D8 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				9779B8E7266D94F5008FE873 /* HomeView.swift */,
+				9779B910266DFE05008FE873 /* HomeViewModel.swift */,
+				975107742674612D00E69481 /* HorizontalScrollView.swift */,
+				97D3E0FE2674589B0066FD30 /* MediaItemCell.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		9779B8D9266D94F5008FE873 = {
 			isa = PBXGroup;
 			children = (
@@ -113,11 +144,8 @@
 		9779B8E4266D94F5008FE873 /* Nasubi */ = {
 			isa = PBXGroup;
 			children = (
-				9779B9192672012C008FE873 /* AsyncImageView.swift */,
-				9779B8E7266D94F5008FE873 /* HomeView.swift */,
-				9779B910266DFE05008FE873 /* HomeViewModel.swift */,
-				975107742674612D00E69481 /* HorizontalScrollView.swift */,
-				97D3E0FE2674589B0066FD30 /* MediaItemCell.swift */,
+				9731F59E2677375C001CF5D8 /* SupportViews */,
+				9731F59F2677376A001CF5D8 /* HomeView */,
 				9779B90A266DF5EF008FE873 /* Network */,
 				9779B90F266DFDC4008FE873 /* Model */,
 				9779B912266F8667008FE873 /* SupportingFiles */,
@@ -152,8 +180,6 @@
 				9779B908266DEB47008FE873 /* Endpoint.swift */,
 				9779B91D26743C95008FE873 /* ImageEndPoint.swift */,
 				9779B8F6266D9EB6008FE873 /* NetworkManager.swift */,
-				9779B90B266DF607008FE873 /* URLSession+RequestEndpoint.swift */,
-				9779B91B2672114E008FE873 /* MovieDBConfiguration.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -161,12 +187,8 @@
 		9779B90F266DFDC4008FE873 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9731F59D2677360F001CF5D8 /* Trending */,
 				9779B8F4266D98B6008FE873 /* Movie.swift */,
-				9779B915266F9147008FE873 /* Trending.swift */,
-				9751077E2676E62A00E69481 /* Trending.MediaItem.swift */,
-				9779B913266F912D008FE873 /* Trending.Movie.swift */,
-				975107762675AC6100E69481 /* Trending.TVShow.swift */,
-				9751077C2676D11700E69481 /* Trending.Person.swift */,
 				9779B9172671ACBB008FE873 /* Genre.swift */,
 			);
 			path = Model;
@@ -177,6 +199,8 @@
 			children = (
 				9779B8E5266D94F5008FE873 /* NasubiApp.swift */,
 				9779B90D266DF643008FE873 /* NSBError.swift */,
+				9779B90B266DF607008FE873 /* URLSession+RequestEndpoint.swift */,
+				9779B91B2672114E008FE873 /* MovieDBConfiguration.swift */,
 				9731F59B26772B7D001CF5D8 /* SetExtension.swift */,
 			);
 			path = SupportingFiles;
