@@ -10,7 +10,7 @@ import Foundation
 typealias MovieId = Int
 typealias TVShowId = Int
 
-class NetworkManager {
+class NetworkManager: ObservableObject {
    
    func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {

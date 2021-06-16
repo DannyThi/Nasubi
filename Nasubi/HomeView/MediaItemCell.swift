@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct MediaItemCell: View {
+struct MediaItemCell<Destination:View>: View {
    @Binding var mediaItem: Trending.MediaItem
+   var navigationLink: Destination
    
    var body: some View {
-      NavigationLink(destination: Text(mediaItem.itemTitle)) {
+      NavigationLink(destination: navigationLink) {
          VStack {
             //IMAGE
             AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w185))
@@ -50,11 +51,6 @@ struct MediaItemCell: View {
    private func Genres(_ genres: [Genre]) -> some View {
       let output = genres.map { $0.title.capitalized }.joined(separator: ", ")
       Text(output)
-   }
-   
-   @ViewBuilder
-   private func navLinkForView() -> some View {
-      
    }
 }
 

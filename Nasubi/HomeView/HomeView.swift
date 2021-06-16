@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-   
    @ObservedObject var viewModel: HomeViewModel
-      
+   
    init(viewModel: HomeViewModel) {
       self.viewModel = viewModel
    }
@@ -27,9 +26,6 @@ struct HomeView: View {
                Spacer()
             }
             .navigationBarTitle("Trending")
-            .onAppear {
-               
-            }
          }
          .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -48,7 +44,8 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
-               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ),
+                             navigationLink: MovieView(id: item.id))
             }
          }
       }
@@ -62,7 +59,8 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
-               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ),
+                             navigationLink: MovieView(id: item.id))
             }
          }
       }
@@ -78,7 +76,6 @@ struct HomeView: View {
             ForEach(viewModel.trending.filter { $0.mediaType == .person }, id: \.id) { item in
                PersonItemCell(person: Binding(get: { item }, set: { _ in } ))
 //                  .border(Color.black)
-
             }
          }
       }
