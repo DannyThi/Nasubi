@@ -8,17 +8,17 @@
 import Foundation
 
 enum NSBError: Error {
-   case fetchError(Error)
-   case decodeError(Error)
+   case fetchError(String)
+   case decodeError(String)
    
-   var description: String {
-      switch self {
-      case .fetchError(let error):
-         return "Error fetching data: \(error.localizedDescription)"
-      case .decodeError(let error):
-         return "Error decoding data: \(error.localizedDescription)"
-      }
-   }
+//   var description: String {
+//      switch self {
+//      case .fetchError(let error):
+//         return "Error fetching data: \(error.localizedDescription)"
+//      case .decodeError(let error):
+//         return "Error decoding data: \(error.localizedDescription)"
+//      }
+//   }
 }
 
 

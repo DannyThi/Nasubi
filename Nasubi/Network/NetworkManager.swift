@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias MovieID = Int
+typealias MovieId = Int
 typealias TVShowID = Int
 
 
@@ -15,32 +15,35 @@ class NetworkManager {
    
    func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {
+      print("Fetching Trending: \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue).")
       URLSession.shared.request(.trendingMedia(mediaType: mediaType, timeWindow: timeWindow)) { data, response, error in
          guard let jsonData = data else {
-            completion(.failure(.fetchError(error!)))
+            completion(.failure(.fetchError(error!.localizedDescription)))
             return
          }
          do {
             let networkResponse = try self.decode(jsonData: jsonData, to: Trending.NetworkResponse.self)
+            print("Recieved trending \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue.capitalized)")
             completion(.success(networkResponse))
          }
          catch let error {
-            completion(.failure(.decodeError(error)))
+            completion(.failure(.decodeError(error.localizedDescription)))
          }
       }
    }
    
-   func fetchMovie(byId id: MovieID, completion: @escaping (Result<Movie_,NSBError>) -> Void) {
+   func fetchMovie(byId id: MovieId, completion: @escaping (Result<Movie,NSBError>) -> Void) {
+      print("Fetching movie. ID: \(id)")
       URLSession.shared.request(.movie(withId: id)) { data, response, error in
          guard let data = data else {
-            completion(.failure(.fetchError(error!)))
+            completion(.failure(.fetchError(error!.localizedDescription)))
             return
          }
          do {
-            let movie = try self.decode(jsonData: data, to: Movie_.self)
+            let movie = try self.decode(jsonData: data, to: Movie.self)
             completion(.success(movie))
          } catch let error {
-            completion(.failure(.decodeError(error)))
+            completion(.failure(.decodeError(error.localizedDescription)))
          }
       }
    }
@@ -50,12 +53,12 @@ class NetworkManager {
       do {
          let decoder = JSONDecoder()
          decoder.keyDecodingStrategy = .convertFromSnakeCase
-         
          let output = try decoder.decode(T.self, from: data)
          return output
       }
       catch let error {
-         throw NSBError.decodeError(error)
+         print("Fail")
+         throw NSBError.decodeError(error.localizedDescription)
       }
    }
 }

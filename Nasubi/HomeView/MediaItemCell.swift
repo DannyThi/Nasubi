@@ -15,7 +15,7 @@ struct MediaItemCell: View {
          VStack {
             //IMAGE
             AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w300))
-               .frame(width: 160)
+               .frame(width: 160, alignment: .top)
                .aspectRatio(0.669, contentMode: .fit)
                .cornerRadius(20)
             
@@ -31,7 +31,7 @@ struct MediaItemCell: View {
             
             // GENRE
             HStack {
-               Genres(mediaItem.genreIds)
+               Genres(mediaItem.genreIds!)
                   .font(.footnote)
                   .foregroundColor(Color(UIColor.secondaryLabel))
                   .lineLimit(2)
@@ -40,7 +40,6 @@ struct MediaItemCell: View {
             Spacer()
          }
          .frame(width: 160, height: 340)
-//         .accentColor(Color(UIColor.label))
       }
    }
    
@@ -48,5 +47,10 @@ struct MediaItemCell: View {
    private func Genres(_ genres: [Genre]) -> some View {
       let output = genres.map { $0.title.capitalized }.joined(separator: ", ")
       Text(output)
+   }
+   
+   @ViewBuilder
+   private func navLinkForView() -> some View {
+      
    }
 }

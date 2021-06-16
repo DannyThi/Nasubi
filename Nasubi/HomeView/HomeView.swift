@@ -18,11 +18,9 @@ struct HomeView: View {
    var body: some View {
       NavigationView {
          ScrollView(.vertical) {
-            VStack(alignment: .leading) {
-               Text("Movies")
-                  .font(.title2)
+            VStack(alignment: .center) {
                Movies
-               Text("TV Shows")
+               Divider()
                TVShows
                Spacer()
             }
@@ -35,21 +33,33 @@ struct HomeView: View {
    }
    
    var Movies: some View {
-      HorizontalScrollView {
-         ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
-            MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+      Group {
+         Text("Movies")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .padding()
+         HorizontalScrollView {
+            ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
+               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+            }
          }
       }
    }
    
    var TVShows: some View {
-      HorizontalScrollView {
-         ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
-            MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+      Group {
+         Text("TV Shows")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .padding()
+         HorizontalScrollView {
+            ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
+               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+            }
          }
       }
    }
-   
+
    @ViewBuilder
    private func scrollViewBuilder(for content: AnyView) -> some View {
       ScrollView(.horizontal) {
@@ -62,7 +72,7 @@ struct HomeView: View {
    
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel(networkManager: NetworkManager()))
     }

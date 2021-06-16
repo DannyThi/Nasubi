@@ -27,7 +27,8 @@ class HomeViewModel: ObservableObject {
          DispatchQueue.main.async {
             switch networkResponse {
             case let .failure(error):
-               print(NSBError.decodeError(error))
+               
+               print(error.localizedDescription)
             case let .success(response):
                let results = response.results
                self.trending.insert(results)
@@ -48,7 +49,7 @@ class HomeViewModel: ObservableObject {
    private func updateData() {
       self.fetchTrendingData(mediaType: .movie, timeWindow: timeWindow)
       self.fetchTrendingData(mediaType: .tv, timeWindow: timeWindow)
-      self.fetchTrendingData(mediaType: .person, timeWindow: timeWindow)
+      self.fetchTrendingData(mediaType: .person, timeWindow: .day)
    }
 }
 

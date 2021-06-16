@@ -13,7 +13,6 @@ enum Genre: Decodable, Hashable {
    
    case actionAdventure, kids, news, reality, scifiFantasy, soap, talk, warPolitics
    
-   
    case unknown(value: Int)
    
    init(from decoder: Decoder) throws {

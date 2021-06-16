@@ -8,7 +8,7 @@
 import Foundation
 
 extension Endpoint {
-   static func movie(withId id: MovieID) -> Self {
+   static func movie(withId id: MovieId) -> Self {
       Endpoint(path: "movies/\(id)")
    }
    
@@ -45,7 +45,7 @@ struct Endpoint {
          preconditionFailure("Invalid URL components: \(components)")
       }
       
-      print(url)
+//      print(url)
       return url
    }
 }
