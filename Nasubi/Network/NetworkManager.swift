@@ -8,8 +8,7 @@
 import Foundation
 
 typealias MovieId = Int
-typealias TVShowID = Int
-
+typealias TVShowId = Int
 
 class NetworkManager {
    
@@ -57,7 +56,6 @@ class NetworkManager {
          return output
       }
       catch let error {
-         print("Fail")
          throw NSBError.decodeError(error.localizedDescription)
       }
    }

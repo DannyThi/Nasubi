@@ -12,7 +12,7 @@ extension Endpoint {
       Endpoint(path: "movies/\(id)")
    }
    
-   static func tvShow(withId id: TVShowID) -> Self {
+   static func tvShow(withId id: TVShowId) -> Self {
       Endpoint(path: "tvshows/\(id)")
    }
    

@@ -12,10 +12,10 @@ struct HorizontalScrollView<Content: View>: View {
    
    var body: some View {
       ScrollView(.horizontal) {
-         HStack(spacing: 10) {
+         HStack(spacing: 20) {
             content()
          }
-         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+         .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
       }
    }
 }

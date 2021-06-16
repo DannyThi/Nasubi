@@ -22,11 +22,19 @@ struct HomeView: View {
                Movies
                Divider()
                TVShows
+               Divider()
+               Persons
                Spacer()
             }
             .navigationBarTitle("Trending")
             .onAppear {
                
+            }
+         }
+         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+               Image(systemName: "magnifyingglass")
+                  .imageScale(.large)
             }
          }
       }
@@ -59,17 +67,22 @@ struct HomeView: View {
          }
       }
    }
+   
+   var Persons: some View {
+      Group {
+         Text("People")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .padding()
+         HorizontalScrollView {
+            ForEach(viewModel.trending.filter { $0.mediaType == .person }, id: \.id) { item in
+               PersonItemCell(person: Binding(get: { item }, set: { _ in } ))
+//                  .border(Color.black)
 
-   @ViewBuilder
-   private func scrollViewBuilder(for content: AnyView) -> some View {
-      ScrollView(.horizontal) {
-         HStack(spacing: 10) {
-            content
+            }
          }
-         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
       }
    }
-   
 }
 
 struct HomeView_Previews: PreviewProvider {

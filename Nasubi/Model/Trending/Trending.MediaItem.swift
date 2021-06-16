@@ -27,7 +27,7 @@ extension Trending {
       
       var genreIds: [Genre]?
 
-      var popularity: Float
+      var popularity: Float?
       var voteCount: Int?
       var voteAverage: Float?
       
@@ -45,8 +45,9 @@ extension Trending {
 
       // PERSON
       var gender: Int?
-//      var knownFor: [MediaItem]?
+      var knownFor: [MediaItem]?
       var knownForDepartment: String?
+      var profilePath: String?
    }
 
 //               {

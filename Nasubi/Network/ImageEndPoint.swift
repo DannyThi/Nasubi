@@ -11,7 +11,11 @@ extension ImageEndPoint {
    static func backdrop(path: String, size: BackdropSize) -> Self {
       ImageEndPoint(imagePath: path, size: size.rawValue)
    }
-   static func poster(path: String, size: BackdropSize) -> Self {
+   static func poster(path: String, size: ProfileSize) -> Self {
+      ImageEndPoint(imagePath: path, size: size.rawValue)
+   }
+   
+   static func profile(path: String, size: ProfileSize) -> Self {
       ImageEndPoint(imagePath: path, size: size.rawValue)
    }
 }
@@ -36,19 +40,19 @@ struct ImageEndPoint {
       case w300, w780, w1280, original
    }
    
-   enum logoSize: String {
+   enum LogoSize: String {
       case w45, w92, w154, w185, w300, w500, original
    }
    
-   enum posterSize: String {
+   enum PosterSize: String {
       case w92, w154, w185, w342, w500, w780, original
    }
    
-   enum profileSize: String {
+   enum ProfileSize: String {
       case w45, w185, h632, original
    }
    
-   enum stillSize: String {
+   enum StillSize: String {
       case w92, w185, w300, original
    }
 }

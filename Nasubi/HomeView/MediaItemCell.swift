@@ -14,10 +14,13 @@ struct MediaItemCell: View {
       NavigationLink(destination: Text(mediaItem.itemTitle)) {
          VStack {
             //IMAGE
-            AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w300))
+            AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath!, size: .w185))
+               .scaledToFill()
                .frame(width: 160, alignment: .top)
                .aspectRatio(0.669, contentMode: .fit)
                .cornerRadius(20)
+//               .border(Color.black)
+
             
             // TITLE
             HStack {
@@ -53,4 +56,11 @@ struct MediaItemCell: View {
    private func navLinkForView() -> some View {
       
    }
+}
+
+
+struct MediaItemCell_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView(viewModel: HomeViewModel(networkManager: NetworkManager()))
+    }
 }

@@ -43,10 +43,9 @@ struct AsyncImageView: View {
          if let image = imageLoader.image {
             Image(uiImage: image)
                .resizable()
-               .scaledToFill()
-               .clipped()
+         } else {
+            ProgressView()
          }
-         ProgressView()
       }
    }
 }

@@ -15,6 +15,7 @@ struct NasubiApp: App {
    var body: some Scene {
       WindowGroup {
          HomeView(viewModel: contentViewModel)
+            .environment(\.colorScheme, .dark)
       }
    }
 }
