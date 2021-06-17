@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+// THERE IS A SWIFTUI BUG IN WHICH ONAPPEAR IS CALLED TWICE
+
 struct HomeView: View {
-   @ObservedObject var viewModel: HomeViewModel
+   @ObservedObject private var viewModel: HomeViewModel
+   @EnvironmentObject private var networkManager: NetworkManager
    
    init(viewModel: HomeViewModel) {
       self.viewModel = viewModel
@@ -44,9 +47,15 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
-               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ),
-                             navigationLink: MovieView(id: item.id))
+               NavigationLink(destination: MovieView()) {
+                  MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+               }
             }
+         }
+      }.onAppear {
+         networkManager.fetchTrending(mediaType: .movie, timeWindow: viewModel.timeWindow) {
+            networkResponse in
+            viewModel.handle(networkResponse)
          }
       }
    }
@@ -59,9 +68,15 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
-               MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ),
-                             navigationLink: MovieView(id: item.id))
+               NavigationLink(destination: MovieView()) {
+                  MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+               }
             }
+         }
+      }.onAppear {
+         networkManager.fetchTrending(mediaType: .tv, timeWindow: viewModel.timeWindow) {
+            networkResponse in
+            viewModel.handle(networkResponse)
          }
       }
    }
@@ -78,12 +93,18 @@ struct HomeView: View {
 //                  .border(Color.black)
             }
          }
+      }.onAppear {
+         networkManager.fetchTrending(mediaType: .person, timeWindow: viewModel.timeWindow) {
+            networkResponse in
+            viewModel.handle(networkResponse)
+         }
       }
    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(networkManager: NetworkManager()))
+        HomeView(viewModel: HomeViewModel())
+         .environmentObject(NetworkManager())
     }
 }

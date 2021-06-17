@@ -11,8 +11,8 @@ struct MovieView: View {
       
    @StateObject private var viewModel: MovieViewModel
    
-   init(id: MovieId, networkManager: NetworkManager = NetworkManager()) {
-      self._viewModel = StateObject(wrappedValue: MovieViewModel(id: id, networkManager: networkManager))
+   init() {
+      self._viewModel = StateObject(wrappedValue: .init())
    }
    
    var body: some View {
@@ -43,6 +43,6 @@ struct MovieView: View {
 
 struct ContentView_Previews: PreviewProvider {
    static var previews: some View {
-      MovieView(id: 581726, networkManager: NetworkManager())
+      MovieView()
    }
 }
