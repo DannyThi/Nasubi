@@ -24,11 +24,11 @@ struct PersonItemCell: View {
                      Text(person.itemTitle)
                         .font(.body)
                         .fontWeight(.semibold)
-                        .foregroundColor(Color(UIColor.label))
+                        .foregroundColor(Color(.label))
                         .padding(.bottom, 1)
                      Text(person.knownForDepartment ?? "")
                         .font(.footnote)
-                        .foregroundColor(Color(UIColor.secondaryLabel))
+                        .foregroundColor(Color(.secondaryLabel))
                         .lineLimit(2)
                   }
                   Spacer()
@@ -45,5 +45,6 @@ struct PersonItemCell_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
          .environmentObject(NetworkManager())
+         .preferredColorScheme(.dark)
     }
 }

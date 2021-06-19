@@ -13,6 +13,8 @@ typealias URLStringPath = String
 struct AsyncImageView: View {
    
    @StateObject private var imageLoader: ImageLoader
+   var width: CGFloat { imageLoader.image?.size.width ?? 0.0 }
+   var height: CGFloat { imageLoader.image?.size.height ?? 0.0 }
    
    var imagePath: String? {
       get { imageLoader.imagePath }

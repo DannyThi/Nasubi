@@ -14,7 +14,7 @@ class NetworkManager: ObservableObject {
    
    func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {
-      print("Fetching Trending: \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue).")
+//      print("Fetching Trending: \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue).")
       URLSession.shared.request(.trendingMedia(mediaType: mediaType, timeWindow: timeWindow)) { data, response, error in
          guard let jsonData = data else {
             completion(.failure(.fetchError(error!.localizedDescription)))
@@ -22,7 +22,7 @@ class NetworkManager: ObservableObject {
          }
          do {
             let networkResponse = try self.decode(jsonData: jsonData, to: Trending.NetworkResponse.self)
-            print("Recieved trending \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue.capitalized)")
+//            print("Recieved trending \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue.capitalized)")
             completion(.success(networkResponse))
          }
          catch let error {
@@ -32,7 +32,7 @@ class NetworkManager: ObservableObject {
    }
    
    func fetchMovie(byId id: MovieId, completion: @escaping (Result<Movie,NSBError>) -> Void) {
-      print("Fetching movie. ID: \(id)")
+//      print("Fetching movie. ID: \(id)")
       URLSession.shared.request(.movie(withId: id)) { data, response, error in
          guard let data = data else {
             completion(.failure(.fetchError(error!.localizedDescription)))
@@ -41,7 +41,8 @@ class NetworkManager: ObservableObject {
          do {
             let movie = try self.decode(jsonData: data, to: Movie.self)
             completion(.success(movie))
-         } catch let error {
+         }
+         catch let error {
             completion(.failure(.decodeError(error.localizedDescription)))
          }
       }

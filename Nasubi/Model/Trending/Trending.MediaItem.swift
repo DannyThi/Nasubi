@@ -25,7 +25,7 @@ extension Trending {
       var overview: String?
       var originalLanguage: String?
       
-      var genreIds: [Genre]?
+      var genreIds: [GenreId]?
 
       var popularity: Float?
       var voteCount: Int?

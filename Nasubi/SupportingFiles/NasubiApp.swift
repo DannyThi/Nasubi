@@ -17,6 +17,7 @@ struct NasubiApp: App {
          HomeView(viewModel: contentViewModel)
             .environmentObject(NetworkManager())
             .environment(\.colorScheme, .dark)
+            .preferredColorScheme(.dark)
       }
    }
 }

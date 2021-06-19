@@ -7,7 +7,12 @@
 
 import Foundation
 
-enum Genre: Decodable, Hashable {
+struct Genre: Decodable, Hashable, Identifiable {
+   let id: GenreId
+   let name: String
+}
+
+enum GenreId: Decodable, Hashable {
    case action, adventure, animation, comedy, crime, documentary, drama, family, fantasy, history,
         horror, music, mystery, romance, scifi, tvmovie, thriller, war, western
    

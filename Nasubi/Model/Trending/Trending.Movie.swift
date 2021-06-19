@@ -25,7 +25,7 @@ extension Trending {
       var overview: String
       var originalLanguage: String
       
-      var genreIds: [Genre]
+      var genreIds: [GenreId]
       var releaseDate: String
       var video: Bool?
       var adult: Bool

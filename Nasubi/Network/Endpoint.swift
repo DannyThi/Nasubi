@@ -9,7 +9,8 @@ import Foundation
 
 extension Endpoint {
    static func movie(withId id: MovieId) -> Self {
-      Endpoint(path: "movies/\(id)")
+      let queryItem = URLQueryItem(name: "language", value: "en-US")
+      return Endpoint(path: "movie/\(id)", queryItems: [queryItem])
    }
    
    static func tvShow(withId id: TVShowId) -> Self {
@@ -31,7 +32,7 @@ struct Endpoint {
    }
    
    private var path: String
-   private var queryItems: [URLQueryItem] = []
+   private var queryItems: [URLQueryItem]
    
    var url: URL {
       var components = URLComponents()
@@ -39,7 +40,6 @@ struct Endpoint {
       components.host = "api.themoviedb.org"
       components.path = "/3/" + path
       components.queryItems = queryItems
-      components.queryItems!.append(URLQueryItem(name: "api_key", value: Self.apikey))
             
       guard let url = components.url else {
          preconditionFailure("Invalid URL components: \(components)")
@@ -47,6 +47,16 @@ struct Endpoint {
       
 //      print(url)
       return url
+   }
+   
+   init(path: String, queryItems: [URLQueryItem] = []) {
+      self.path = path
+      let key = URLQueryItem(name: "api_key", value: Self.apikey)
+      var newQueryItems = [key]
+      for item in queryItems {
+         newQueryItems.append(item)
+      }
+      self.queryItems = newQueryItems
    }
 }
 

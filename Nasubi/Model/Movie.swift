@@ -20,23 +20,23 @@ struct Movie: Decodable {
    // DETAILS
    var overview: String?
    var tagline: String?
-   var originalLanguage: String
-   var spokenLanguages: [SpokenLanguage]
+   var originalLanguage: String?
+   var spokenLanguages: [SpokenLanguage]?
    var runtime: Int?
 
    // SECONDARY DETAILS
-   var genres: [Genre]
-   var releaseDate: String
-   var video: Bool
-   var adult: Bool
-   var belongsToCollection: Bool? // this might error
+   var genres: [Genre]?
+   var releaseDate: String?
+   var video: Bool?
+   var adult: Bool?
+//   var belongsToCollection: Bool? // this might error
 
    // PRODUCTION
-   var productionCompanies: [ProductionCompany]
-   var productionCountries: [ProductionCountries]
-   var status: MediaStatus
-   var budget: Int
-   var revenue: Int
+   var productionCompanies: [ProductionCompany]?
+   var productionCountries: [ProductionCountries]?
+   var status: MediaStatus?
+   var budget: Int?
+   var revenue: Int?
 
    // RATINGS
    var popularity: Float
@@ -69,12 +69,39 @@ extension Movie {
       var name: String
    }
    
-   enum MediaStatus: String, Decodable {
-      case Rumored = "Rumored"
-      case Planned = "Planned"
-      case InProduction = "In Production"
-      case PostProduction = "Post Production"
-      case Released = "Released"
-      case Canceled = "Canceled"
+   enum MediaStatus: Decodable {
+      case rumored, planned, inProduction, postProduction, released, canceled
+      case unknown(String)
+      
+      var title: String {
+         switch self {
+         case .rumored:          return "rumored"
+         case .planned:          return "planned"
+         case .inProduction:     return "in production"
+         case .postProduction:   return "post production"
+         case .released:         return "released"
+         case .canceled:         return "cancelled"
+         case .unknown(let status):
+                                 return "unknown: \(status)"
+         }
+      }
+      
+      init(from decoder: Decoder) throws {
+         do {
+            let container = try decoder.singleValueContainer()
+            let status = try container.decode(String.self)
+            
+            switch status {
+            case "rumored":         self = .rumored
+            case "planned":         self = .planned
+            case "in_production":   self = .inProduction
+            case "post_production": self = .postProduction
+            case "released":        self = .released
+            case "canceled":        self = .canceled
+            default:
+               self = .unknown(status)
+            }
+         }
+      }
    }
 }

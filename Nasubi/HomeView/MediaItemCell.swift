@@ -24,7 +24,7 @@ struct MediaItemCell: View {
             Text(mediaItem.itemTitle)
                .font(.title3)
                .fontWeight(.semibold)
-               .foregroundColor(Color(UIColor.label))
+               .foregroundColor(Color(.label))
                .padding(.bottom, 1)
             Spacer()
          }
@@ -33,7 +33,7 @@ struct MediaItemCell: View {
          HStack {
             Genres(mediaItem.genreIds!)
                .font(.footnote)
-               .foregroundColor(Color(UIColor.secondaryLabel))
+               .foregroundColor(Color(.secondaryLabel))
                .lineLimit(2)
             Spacer()
          }
@@ -44,7 +44,7 @@ struct MediaItemCell: View {
    }
    
    @ViewBuilder
-   private func Genres(_ genres: [Genre]) -> some View {
+   private func Genres(_ genres: [GenreId]) -> some View {
       let output = genres.map { $0.title.capitalized }.joined(separator: ", ")
       Text(output)
    }
@@ -55,5 +55,7 @@ struct MediaItemCell_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
          .environmentObject(NetworkManager())
+         .preferredColorScheme(.dark)
+
     }
 }

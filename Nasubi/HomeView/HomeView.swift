@@ -36,7 +36,7 @@ struct HomeView: View {
                   .imageScale(.large)
             }
          }
-      }
+      }.accentColor(.white)
    }
    
    var Movies: some View {
@@ -47,7 +47,7 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
-               NavigationLink(destination: MovieView()) {
+               NavigationLink(destination: MovieView(movieId: item.id)) {
                   MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
                }
             }
@@ -68,7 +68,7 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
-               NavigationLink(destination: MovieView()) {
+               NavigationLink(destination: MovieView(movieId: item.id)) {
                   MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
                }
             }
@@ -106,5 +106,6 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
          .environmentObject(NetworkManager())
+         .preferredColorScheme(.dark)
     }
 }
