@@ -41,7 +41,7 @@ extension MovieViewModel {
 }
 
 
-// MARK: - TITLE SECTION
+// MARK: - TITLE
 extension MovieViewModel {
    var movieTitle: String {
       self.movie?.itemTitle ?? ""
@@ -77,7 +77,15 @@ extension MovieViewModel {
 
 // MARK: - RATINGS
 extension MovieViewModel {
-   var rating: Float {
+   var rating: Double {
       self.movie?.voteAverage ?? 0.0
+   }
+}
+
+
+//MARK: - OVERVIEW
+extension MovieViewModel {
+   var overview: String {
+      self.movie?.overview ?? ""
    }
 }

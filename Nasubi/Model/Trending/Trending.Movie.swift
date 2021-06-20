@@ -30,9 +30,9 @@ extension Trending {
       var video: Bool?
       var adult: Bool
       
-      var popularity: Float
+      var popularity: Double
       var voteCount: Int
-      var voteAverage: Float
+      var voteAverage: Double
       
       var posterPath: String?
       var backdropPath: String?

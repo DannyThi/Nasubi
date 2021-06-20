@@ -50,8 +50,12 @@ struct MovieView: View {
    
    private var MovieDetails: some View {
       ScrollView(.vertical) {
-         TitleSection
-         RatingsSection
+         VStack {
+            TitleSection
+            RatingsSection
+            OverviewSection
+            Spacer()
+         }
       }
    }
 }
@@ -61,8 +65,10 @@ struct MovieView: View {
 extension MovieView {
    private var BackdropImage: some View {
       VStack {
-         AsyncImageView(imageEndPoint: .backdrop(path: viewModel.backdropPath, size: .w300))
-            .scaledToFit()
+         AsyncImageView(imageEndPoint: .backdrop(path: viewModel.backdropPath, size: .w780))
+            .scaledToFill()
+            .frame(maxHeight: 200, alignment: .top)
+            .clipped()
             .overlay(
                Color.clear
                   .background(
@@ -95,7 +101,6 @@ extension MovieView {
                .lineLimit(2)
                .multilineTextAlignment(.center)
          }
-         Spacer()
       }
    }
 }
@@ -116,11 +121,14 @@ extension MovieView {
    }
    
    @ViewBuilder
-   private func RatingsBuilder(ratings: Float) -> some View {
-      let stars = Int(ratings / 2)
-      let remainder = 5 - Int(ratings / 2)
+   private func RatingsBuilder(ratings: Double) -> some View {
+      let percent = ratings * 10
+      let stars = (percent + 0.5) / 20
+      let rounded = Int(stars.rounded())
+      let remainder = Int(5 - rounded)
+      
       HStack {
-         ForEach(0..<stars) { _ in
+         ForEach(0..<rounded) { _ in
             Image(systemName: "star.fill")
                .renderingMode(.original)
          }
@@ -132,6 +140,20 @@ extension MovieView {
    }
 }
 
+
+//MARK: - OVERVIEW
+extension MovieView {
+   private var OverviewSection: some View {
+      VStack(alignment: .leading) {
+         Text("Overview")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .padding(.bottom, 4)
+         Text(viewModel.overview)
+            .lineSpacing(5.0)
+      }
+   }
+}
 
 
 struct ContentView_Previews: PreviewProvider {

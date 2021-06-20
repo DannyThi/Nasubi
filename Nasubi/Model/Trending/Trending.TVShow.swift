@@ -29,9 +29,9 @@ extension Trending {
       var firstAirDate: String
       var originCountry: [String]
       
-      var popularity: Float
+      var popularity: Double
       var voteCount: Int
-      var voteAverage: Float
+      var voteAverage: Double
       
       var posterPath: String?
       var backdropPath: String?

@@ -39,9 +39,9 @@ struct Movie: Decodable {
    var revenue: Int?
 
    // RATINGS
-   var popularity: Float
+   var popularity: Double
    var voteCount: Int
-   var voteAverage: Float
+   var voteAverage: Double
    
    // LINKS
    var imdbId: String?
