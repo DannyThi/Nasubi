@@ -49,7 +49,7 @@ struct PersonView: View {
       .padding(.horizontal)
       .navigationBarBackButtonHidden(true)
       .onAppear {
-         networkManager.fetchPerson(byId: viewModel.personId) { response in
+         networkManager.fetchMedia(.person, byId: viewModel.personId) { response in
             viewModel.handle(response: response)
          }
       }

@@ -12,7 +12,7 @@ extension ImageEndPoint {
       ImageEndPoint(imagePath: path, size: size.rawValue)
    }
    
-   static func poster(path: String, size: ProfileSize) -> Self {
+   static func poster(path: String, size: PosterSize) -> Self {
       ImageEndPoint(imagePath: path, size: size.rawValue)
    }
    

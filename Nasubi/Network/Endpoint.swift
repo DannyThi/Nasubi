@@ -8,6 +8,17 @@
 import Foundation
 
 extension Endpoint {
+   static func media(type: MediaType, withId id: Int) -> Self {
+      switch type {
+      case .movie:
+         return movie(withId: id)
+      case .tv:
+         return tvShow(withId: id)
+      case .person:
+         return person(withId: id)
+      }
+   }
+   
    static func movie(withId id: MovieId) -> Self {
       let queryItem = URLQueryItem(name: "language", value: "en-US")
       return Endpoint(path: "movie/\(id)", queryItems: [queryItem])
@@ -18,7 +29,8 @@ extension Endpoint {
    }
    
    static func tvShow(withId id: TVShowId) -> Self {
-      Endpoint(path: "tvshows/\(id)")
+      let queryItem = URLQueryItem(name: "language", value: "en-US")
+      return Endpoint(path: "tvshow/\(id)", queryItems: [queryItem])
    }
    
    static func trendingMedia(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) -> Self {

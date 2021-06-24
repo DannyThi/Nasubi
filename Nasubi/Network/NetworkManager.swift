@@ -10,9 +10,22 @@ import Foundation
 typealias MovieId = Int
 typealias TVShowId = Int
 
-class NetworkManager: NetworkProtocol {
-   
-   override func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
+protocol NetworkProtocol {
+   func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
+                      completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void)
+   func fetchMedia<T:Decodable>(_ type: MediaType, byId id: Int, completion: @escaping (Result<T, NSBError>) -> Void)
+
+//   @available(*, deprecated, message: "Use fetchmedia instead")
+//   func fetchMovie(byId id: MovieId, completion: @escaping (Result<Movie,NSBError>) -> Void)
+//   @available(*, deprecated, message: "Use fetchMedia instead")
+//   func fetchPerson(byId id: PersonId, completion: @escaping (Result<Person,NSBError>) -> Void)
+//   
+
+}
+
+class NetworkManager: ObservableObject, NetworkProtocol {
+
+   func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {
 //      print("Fetching Trending: \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue).")
       URLSession.shared.request(.trendingMedia(mediaType: mediaType, timeWindow: timeWindow)) { data, response, error in
@@ -31,40 +44,22 @@ class NetworkManager: NetworkProtocol {
       }
    }
    
-   override func fetchMovie(byId id: MovieId, completion: @escaping (Result<Movie,NSBError>) -> Void) {
-//      print("Fetching movie. ID: \(id)")
-      URLSession.shared.request(.movie(withId: id)) { data, response, error in
+   func fetchMedia<T:Decodable>(_ type: MediaType, byId id: Int, completion: @escaping (Result<T, NSBError>) -> Void) {
+      URLSession.shared.request(.media(type: type, withId: id)) { data, response, error in
          guard let data = data else {
             completion(.failure(.fetchError(error!.localizedDescription)))
             return
          }
          do {
-            let movie = try self.parse(jsonData: data, to: Movie.self)
-            completion(.success(movie))
+            let item = try self.parse(jsonData: data, to: T.self)
+            completion(.success(item))
          }
          catch let error {
             completion(.failure(.decodeError(error.localizedDescription)))
          }
       }
    }
-   
-   override func fetchPerson(byId id: PersonId, completion: @escaping (Result<Person,NSBError>) -> Void) {
-//      print("Fetching person. ID: \(id)")
-      URLSession.shared.request(.person(withId: id)) { data, response, error in
-         guard let data = data else {
-            completion(.failure(.fetchError(error!.localizedDescription)))
-            return
-         }
-         do {
-            let movie = try self.parse(jsonData: data, to: Person.self)
-            completion(.success(movie))
-         }
-         catch let error {
-            completion(.failure(.decodeError(error.localizedDescription)))
-         }
-      }
-   }
-   
+
    private typealias JSONData = Data
    private func parse<T>(jsonData data: JSONData, to type: T.Type) throws -> T where T: Decodable {
       do {

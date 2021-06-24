@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum MediaType {
+   case movie, tv, person
+}
+
 struct Movie: Decodable {
    
    private var title: String

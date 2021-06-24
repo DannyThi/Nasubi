@@ -42,7 +42,7 @@ struct MovieView: View {
          }
       }
       .onAppear {
-         networkManager.fetchMovie(byId: viewModel.movieId) { response in
+         networkManager.fetchMedia(.movie, byId: viewModel.movieId) { response in
             viewModel.handle(response)
          }
       }
