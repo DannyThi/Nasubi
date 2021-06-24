@@ -11,6 +11,7 @@ extension ImageEndPoint {
    static func backdrop(path: String, size: BackdropSize) -> Self {
       ImageEndPoint(imagePath: path, size: size.rawValue)
    }
+   
    static func poster(path: String, size: ProfileSize) -> Self {
       ImageEndPoint(imagePath: path, size: size.rawValue)
    }

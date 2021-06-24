@@ -82,7 +82,7 @@ extension Movie {
          case .released:         return "released"
          case .canceled:         return "cancelled"
          case .unknown(let status):
-                                 return "unknown: \(status)"
+                                 return "\(status)"
          }
       }
       
@@ -92,14 +92,13 @@ extension Movie {
             let status = try container.decode(String.self)
             
             switch status {
-            case "rumored":         self = .rumored
-            case "planned":         self = .planned
-            case "in_production":   self = .inProduction
-            case "post_production": self = .postProduction
-            case "released":        self = .released
-            case "canceled":        self = .canceled
-            default:
-               self = .unknown(status)
+            case "Rumored":         self = .rumored
+            case "Planned":         self = .planned
+            case "In_production":   self = .inProduction
+            case "Post_production": self = .postProduction
+            case "Released":        self = .released
+            case "Canceled":        self = .canceled
+            default:                self = .unknown(status)
             }
          }
       }

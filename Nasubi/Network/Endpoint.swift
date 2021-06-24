@@ -12,6 +12,10 @@ extension Endpoint {
       let queryItem = URLQueryItem(name: "language", value: "en-US")
       return Endpoint(path: "movie/\(id)", queryItems: [queryItem])
    }
+   static func person(withId id: PersonId) -> Self {
+      let queryItem = URLQueryItem(name: "language", value: "en-US")
+      return Endpoint(path: "person/\(id)", queryItems: [queryItem])
+   }
    
    static func tvShow(withId id: TVShowId) -> Self {
       Endpoint(path: "tvshows/\(id)")

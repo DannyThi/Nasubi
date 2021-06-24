@@ -44,21 +44,24 @@ extension MovieViewModel {
 // MARK: - TITLE
 extension MovieViewModel {
    var movieTitle: String {
-      self.movie?.itemTitle ?? ""
+      self.movie?.itemTitle ?? "-"
    }
    
+   var tagline: String {
+      self.movie?.tagline ?? "-"
+   }
    var movieSubtitle: String {
       "\(self.year) • \(self.genres) • \(self.runtime)"
    }
    
    private var genres: String {
       let genreString = movie?.genres?.map { $0.name.capitalized }.joined(separator: ", ")
-      return genreString ?? ""
+      return genreString ?? "-"
    }
    
    private var year: String {
       let yearString = movie?.releaseDate?.prefix(4)
-      return String(yearString ?? "")
+      return String(yearString ?? "-")
    }
    
    private var runtime: String {
@@ -70,7 +73,7 @@ extension MovieViewModel {
          formatter.zeroFormattingBehavior = .pad
          return formatter.string(from: time)!
       }
-      return ""
+      return "-"
    }
 }
 
@@ -83,9 +86,65 @@ extension MovieViewModel {
 }
 
 
-//MARK: - OVERVIEW
+// MARK: - OVERVIEW
 extension MovieViewModel {
    var overview: String {
-      self.movie?.overview ?? ""
+      self.movie?.overview ?? "-"
+   }
+}
+
+
+// MARK: - CAST
+//extension MovieViewModel {
+//   var cast: String {
+//      return movie.
+//   }
+//}
+
+// MARK: - MOVIE DETAILS
+extension MovieViewModel {
+   
+   var spokenLanguages: String {
+      let languages = movie?.spokenLanguages?.compactMap { $0.englishName?.capitalized }
+      return languages?.joined(separator: ", ") ?? "-"
+   }
+   
+   var releaseDate: String {
+      return movie?.releaseDate ?? "-"
+   }
+   
+   var status: String {
+      return movie?.status?.title.capitalized ?? "-"
+   }
+
+   var budget: String {
+      guard let budget = movie?.budget else {
+         return "-"
+      }
+      if budget == 0 {
+         return "-"
+      }
+      let formatter = NumberFormatter()
+      formatter.numberStyle = .currency
+      formatter.currencySymbol = "$"
+      formatter.maximumFractionDigits = 0
+      let formatted = formatter.string(from: NSNumber(value: budget))
+      return formatted ?? "-"
+   }
+   
+   var revenue: String {
+      guard let revenue = movie?.revenue else {
+         return "-"
+      }
+      if revenue == 0 {
+         return "-"
+      }
+      
+      let formatter = NumberFormatter()
+      formatter.numberStyle = .currency
+      formatter.currencySymbol = "$"
+      formatter.maximumFractionDigits = 0
+      let formatted = formatter.string(from: NSNumber(value: revenue))
+      return formatted ?? "-"
    }
 }

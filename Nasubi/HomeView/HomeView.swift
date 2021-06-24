@@ -19,7 +19,7 @@ struct HomeView: View {
    
    var body: some View {
       NavigationView {
-         ScrollView(.vertical) {
+         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .center) {
                Movies
                Divider()
@@ -48,7 +48,7 @@ struct HomeView: View {
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .movie }, id: \.id) { item in
                NavigationLink(destination: MovieView(movieId: item.id)) {
-                  MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+                  TrendingMediaCell(mediaItem: Binding(get: { item }, set: { _ in } ))
                }
             }
          }
@@ -68,8 +68,9 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .tv }, id: \.id) { item in
+               #warning("Fix this")
                NavigationLink(destination: MovieView(movieId: item.id)) {
-                  MediaItemCell(mediaItem: Binding(get: { item }, set: { _ in } ))
+                  TrendingMediaCell(mediaItem: Binding(get: { item }, set: { _ in } ))
                }
             }
          }
@@ -89,8 +90,9 @@ struct HomeView: View {
             .padding()
          HorizontalScrollView {
             ForEach(viewModel.trending.filter { $0.mediaType == .person }, id: \.id) { item in
-               PersonItemCell(person: Binding(get: { item }, set: { _ in } ))
-//                  .border(Color.black)
+               NavigationLink(destination: PersonView(personId: item.id)) {
+                  TrendingPersonCell(person: Binding(get: { item }, set: { _ in } ))
+               }
             }
          }
       }.onAppear {

@@ -1,5 +1,5 @@
 //
-//  MediaItemCell.swift
+//  TrendingMediaCell.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/12.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MediaItemCell: View {
+struct TrendingMediaCell: View {
    @Binding var mediaItem: Trending.MediaItem
    
    var body: some View {

@@ -54,6 +54,7 @@ struct MovieView: View {
             TitleSection
             RatingsSection
             OverviewSection
+            MetaDataSection
             Spacer()
          }
       }
@@ -152,16 +153,56 @@ extension MovieView {
          Text(viewModel.overview)
             .lineSpacing(5.0)
       }
+      .padding(.vertical)
    }
 }
 
 
+// MARK: - CAST
+//extension MovieView {
+//   private var CastSection: some View {
+//      ScrollView(.horizontal) {
+//         HStack {
+//            ForEach(viewModel.)
+//         }
+//      }
+//   }
+//}
+
+
+// MARK: - META DATA
+extension MovieView {
+   private var MetaDataSection: some View {
+      VStack {
+         HStack {
+            Text("Meta Data")
+               .font(.title2)
+               .fontWeight(.semibold)
+               .padding(.bottom, 4)
+            Spacer()
+         }
+         
+         VStack(spacing: 10) {
+            TitleDetailView { Text("Status:")} detail: { Text(viewModel.status) }
+            TitleDetailView { Text("Release Date")} detail: { Text(viewModel.releaseDate) }
+            TitleDetailView { Text("Spoken Languages:") } detail: { Text(viewModel.spokenLanguages) }
+            TitleDetailView { Text("Revenue:") } detail: { Text(viewModel.revenue) }
+            TitleDetailView { Text("Budget:") } detail: { Text(viewModel.budget) }
+         }
+      }
+      .padding(.vertical)
+   }
+
+}
+
 struct ContentView_Previews: PreviewProvider {
+   
    static var previews: some View {
       NavigationView {
          MovieView(movieId: 615457)
             .environmentObject(NetworkManager())
             .preferredColorScheme(.dark)
       }
+      
    }
 }
