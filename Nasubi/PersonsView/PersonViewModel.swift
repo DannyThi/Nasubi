@@ -6,7 +6,6 @@
 //
 
 import Foundation
-typealias PersonId = Int
 
 class PersonViewModel: ObservableObject {
    @Published var person: Person?

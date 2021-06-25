@@ -11,7 +11,7 @@ import SwiftUI
 
 struct HomeView: View {
    @ObservedObject private var viewModel: HomeViewModel
-   @EnvironmentObject private var networkManager: NetworkManager
+   @EnvironmentObject private var networkManager: NetworkDataSource
    
    init(viewModel: HomeViewModel) {
       self.viewModel = viewModel
@@ -107,7 +107,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
-         .environmentObject(NetworkManager())
+         .environmentObject(NetworkDataSource(dataSource: DummyNetwork()))
          .preferredColorScheme(.dark)
     }
 }

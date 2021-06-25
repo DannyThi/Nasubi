@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  Networking.swift
 //  Nasubi
 //
 //  Created by Hai Long Danny Thi on 2021/06/07.
@@ -9,22 +9,10 @@ import Foundation
 
 typealias MovieId = Int
 typealias TVShowId = Int
+typealias PersonId = Int
 
-protocol NetworkProtocol {
-   func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
-                      completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void)
-   func fetchMedia<T:Decodable>(_ type: MediaType, byId id: Int, completion: @escaping (Result<T, NSBError>) -> Void)
-
-//   @available(*, deprecated, message: "Use fetchmedia instead")
-//   func fetchMovie(byId id: MovieId, completion: @escaping (Result<Movie,NSBError>) -> Void)
-//   @available(*, deprecated, message: "Use fetchMedia instead")
-//   func fetchPerson(byId id: PersonId, completion: @escaping (Result<Person,NSBError>) -> Void)
-//   
-
-}
-
-class NetworkManager: ObservableObject, NetworkProtocol {
-
+class Networking: ObservableObject, NetworkProtocol {
+   
    func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {
 //      print("Fetching Trending: \(mediaType.rawValue.capitalized) for the \(timeWindow.rawValue).")

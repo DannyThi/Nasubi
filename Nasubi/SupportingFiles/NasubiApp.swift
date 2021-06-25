@@ -15,7 +15,7 @@ struct NasubiApp: App {
    var body: some Scene {
       WindowGroup {
          HomeView(viewModel: contentViewModel)
-            .environmentObject(NetworkManager())
+            .environmentObject(NetworkDataSource(dataSource: Networking()))
             .environment(\.colorScheme, .dark)
             .preferredColorScheme(.dark)
       }

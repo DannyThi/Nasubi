@@ -9,14 +9,12 @@ import SwiftUI
 
 struct PersonView: View {
    @StateObject var viewModel: PersonViewModel
-   @EnvironmentObject var networkManager: NetworkManager
+   @EnvironmentObject var networkManager: NetworkDataSource
    @Environment(\.presentationMode) var presentationMode
-   
    
    init(personId: PersonId) {
       self._viewModel = StateObject(wrappedValue: PersonViewModel(personId: personId))
    }
-   
    
    var body: some View {
       Group {
@@ -48,6 +46,17 @@ struct PersonView: View {
       }
       .padding(.horizontal)
       .navigationBarBackButtonHidden(true)
+      .toolbar {
+         ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+               presentationMode.wrappedValue.dismiss()
+            } label: {
+               Image(systemName: "chevron.left")
+                  .font(.system(size: 44, weight: .bold))
+            }
+            .accentColor(.white)
+         }
+      }
       .onAppear {
          networkManager.fetchMedia(.person, byId: viewModel.personId) { response in
             viewModel.handle(response: response)
@@ -60,7 +69,7 @@ struct PersonsView_Previews: PreviewProvider {
    static var previews: some View {
       NavigationView {
          PersonView(personId: 287)
-            .environmentObject(NetworkManager())
+            .environmentObject(NetworkDataSource(dataSource: DummyNetwork()))
       }
       .preferredColorScheme(.dark)
    }
