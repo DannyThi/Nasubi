@@ -86,4 +86,15 @@ enum Gender: Decodable {
          }
       }
    }
+   
+   var title: String {
+      switch self {
+      case .female:
+         return "female"
+      case .male:
+         return "male"
+      default:
+         return "other"
+      }
+   }
 }

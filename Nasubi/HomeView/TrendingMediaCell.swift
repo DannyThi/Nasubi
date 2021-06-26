@@ -54,7 +54,6 @@ struct TrendingMediaCell: View {
 struct MediaItemCell_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
-         .environmentObject(NetworkDataSource(dataSource: DummyNetwork()))
          .preferredColorScheme(.dark)
 
     }

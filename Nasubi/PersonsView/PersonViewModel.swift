@@ -8,11 +8,13 @@
 import Foundation
 
 class PersonViewModel: ObservableObject {
+   private var network = NetworkDataSource.shared
+
    @Published var person: Person?
    @Published var errorMessage: String?
    
    private(set) var personId: Int
-   
+
    init(personId: PersonId) {
       self.personId = personId
    }
@@ -35,4 +37,36 @@ extension PersonViewModel {
    var profilePath: String {
       return person?.profilePath ?? ""
    }
+   
+   var name: String {
+      return person?.name ?? "-"
+   }
+   
+   var gender: String {
+      return person?.gender?.title ?? "-"
+   }
+   
+   var knownForDepartment: String {
+      person?.knownForDepartment ?? "-"
+   }
+   
+   var biography: String {
+      person?.biography ?? "-"
+   }
 }
+
+//let knownForDepartment: String
+//
+//let biography: String?
+//
+//let birthday: String?
+//let deathDay: String?
+//let placeOfBirth: String?
+//
+//let alsoKnownAs: [String]?
+//let adult: Bool?
+//let imdbId: String
+//let homepage: String?
+//let popularity: Double
+//
+//let profilePath: String?

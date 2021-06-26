@@ -7,11 +7,8 @@
 
 import SwiftUI
 
-// THERE IS A SWIFTUI BUG IN WHICH ONAPPEAR IS CALLED TWICE
-
 struct HomeView: View {
    @ObservedObject private var viewModel: HomeViewModel
-   @EnvironmentObject private var networkManager: NetworkDataSource
    
    init(viewModel: HomeViewModel) {
       self.viewModel = viewModel
@@ -36,7 +33,9 @@ struct HomeView: View {
                   .imageScale(.large)
             }
          }
-      }.accentColor(.white)
+      }
+      .accentColor(.white)
+
    }
    
    var Movies: some View {
@@ -51,11 +50,6 @@ struct HomeView: View {
                   TrendingMediaCell(mediaItem: Binding(get: { item }, set: { _ in } ))
                }
             }
-         }
-      }.onAppear {
-         networkManager.fetchTrending(mediaType: .movie, timeWindow: viewModel.timeWindow) {
-            networkResponse in
-            viewModel.handle(networkResponse)
          }
       }
    }
@@ -74,11 +68,6 @@ struct HomeView: View {
                }
             }
          }
-      }.onAppear {
-         networkManager.fetchTrending(mediaType: .tv, timeWindow: viewModel.timeWindow) {
-            networkResponse in
-            viewModel.handle(networkResponse)
-         }
       }
    }
    
@@ -95,11 +84,6 @@ struct HomeView: View {
                }
             }
          }
-      }.onAppear {
-         networkManager.fetchTrending(mediaType: .person, timeWindow: viewModel.timeWindow) {
-            networkResponse in
-            viewModel.handle(networkResponse)
-         }
       }
    }
 }
@@ -107,7 +91,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
-         .environmentObject(NetworkDataSource(dataSource: DummyNetwork()))
          .preferredColorScheme(.dark)
     }
 }

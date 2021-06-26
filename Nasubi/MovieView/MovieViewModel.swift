@@ -8,7 +8,8 @@
 import Foundation
 
 class MovieViewModel: ObservableObject {
-   
+   private var network = NetworkDataSource.shared
+
    @Published var movie: Movie?
    @Published var errorMessage: String?
 
@@ -16,8 +17,13 @@ class MovieViewModel: ObservableObject {
    
    init(movieId: MovieId) {
       self.movieId = movieId
+      fetch()
    }
 
+   func fetch() {
+      network.fetchMedia(.movie, byId: movieId, completion: { response in self.handle(response) })
+   }
+   
    func handle(_ response: Result<Movie, NSBError>, completion: ((Movie) -> Void)? = nil) {
       DispatchQueue.main.async {
          switch response {

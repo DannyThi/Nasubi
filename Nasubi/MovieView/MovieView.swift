@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MovieView: View {
    @StateObject private var viewModel: MovieViewModel
-   @EnvironmentObject private var networkManager: NetworkDataSource
    @Environment(\.presentationMode) var presentationMode
    
    init(movieId: MovieId) {
@@ -42,9 +41,7 @@ struct MovieView: View {
          }
       }
       .onAppear {
-         networkManager.fetchMedia(.movie, byId: viewModel.movieId) { response in
-            viewModel.handle(response)
-         }
+         
       }
    }
    
@@ -200,7 +197,6 @@ struct ContentView_Previews: PreviewProvider {
    static var previews: some View {
       NavigationView {
          MovieView(movieId: 615457)
-            .environmentObject(NetworkDataSource(dataSource: DummyNetwork()))
             .preferredColorScheme(.dark)
       }
       

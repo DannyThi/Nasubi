@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol AnyMediaItem: Decodable {
-   var id: Int { get }
-   var mediaType: Trending.MediaType { get }
-}
-
 struct Trending: Decodable {
    
    struct NetworkResponse: Decodable {

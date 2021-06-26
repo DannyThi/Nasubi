@@ -10,14 +10,23 @@ import SwiftUI
 @main
 struct NasubiApp: App {
    
+   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
    private let contentViewModel = HomeViewModel()
    
    var body: some Scene {
       WindowGroup {
          HomeView(viewModel: contentViewModel)
-            .environmentObject(NetworkDataSource(dataSource: Networking()))
             .environment(\.colorScheme, .dark)
             .preferredColorScheme(.dark)
       }
+   }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+   func application(_ application: UIApplication,
+                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {      
+      NetworkDataSource.shared.dataSource = Networking()
+      
+      return true
    }
 }

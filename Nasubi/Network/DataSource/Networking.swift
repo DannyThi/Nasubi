@@ -11,7 +11,7 @@ typealias MovieId = Int
 typealias TVShowId = Int
 typealias PersonId = Int
 
-class Networking: ObservableObject, NetworkProtocol {
+class Networking: BaseNetwork, NetworkProtocol {
    
    func fetchTrending(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow,
                       completion: @escaping (Result<Trending.NetworkResponse,NSBError>) -> Void) {
@@ -45,19 +45,6 @@ class Networking: ObservableObject, NetworkProtocol {
          catch let error {
             completion(.failure(.decodeError(error.localizedDescription)))
          }
-      }
-   }
-
-   private typealias JSONData = Data
-   private func parse<T>(jsonData data: JSONData, to type: T.Type) throws -> T where T: Decodable {
-      do {
-         let decoder = JSONDecoder()
-         decoder.keyDecodingStrategy = .convertFromSnakeCase
-         let output = try decoder.decode(T.self, from: data)
-         return output
-      }
-      catch let error {
-         throw NSBError.decodeError(error.localizedDescription)
       }
    }
 }

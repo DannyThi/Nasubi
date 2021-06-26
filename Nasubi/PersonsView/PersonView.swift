@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PersonView: View {
    @StateObject var viewModel: PersonViewModel
-   @EnvironmentObject var networkManager: NetworkDataSource
    @Environment(\.presentationMode) var presentationMode
    
    init(personId: PersonId) {
@@ -20,25 +19,7 @@ struct PersonView: View {
       Group {
          if let person = viewModel.person {
             ScrollView(.vertical) {
-               VStack {
-                  HStack(alignment: .top, spacing: 15) {
-                     AsyncImageView(imageEndPoint: .profile(path: viewModel.profilePath, size: .w185))
-                        .scaledToFit()
-                        .frame(maxWidth: 160, alignment: .top)
-                        .cornerRadius(15)
-                        .clipped()
-                     
-                     VStack {
-                        Text(person.name)
-                           .font(.title2)
-                           .fontWeight(.semibold)
-                     }
-                     
-                     Spacer()
-                  }
-                  
-                  Spacer()
-               }
+               ProfileView
             }
          } else {
             Text("No Person")
@@ -56,11 +37,31 @@ struct PersonView: View {
             }
             .accentColor(.white)
          }
+      }.onAppear {
+         
       }
-      .onAppear {
-         networkManager.fetchMedia(.person, byId: viewModel.personId) { response in
-            viewModel.handle(response: response)
+   }
+   
+   var ProfileView: some View {
+      VStack {
+         HStack(alignment: .top, spacing: 15) {
+            AsyncImageView(imageEndPoint: .profile(path: viewModel.profilePath, size: .w185))
+               .scaledToFit()
+               .frame(maxWidth: 160, alignment: .top)
+               .cornerRadius(15)
+               .clipped()
+            
+            VStack {
+               Text(viewModel.name)
+                  .font(.title2)
+                  .fontWeight(.semibold)
+               Text(viewModel.biography)
+            }
+            
+            Spacer()
          }
+         
+         Spacer()
       }
    }
 }
@@ -69,7 +70,6 @@ struct PersonsView_Previews: PreviewProvider {
    static var previews: some View {
       NavigationView {
          PersonView(personId: 287)
-            .environmentObject(NetworkDataSource(dataSource: DummyNetwork()))
       }
       .preferredColorScheme(.dark)
    }

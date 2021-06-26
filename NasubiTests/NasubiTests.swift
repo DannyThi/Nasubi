@@ -19,17 +19,28 @@ class NasubiTests: XCTestCase {
     }
 
    private func testNetworkManagerAPIKeyImport() {
-      
       XCTAssert(Endpoint.apikey != "", "API key must not be nil")
+   }
+   
+   private func testDummyNetwork() {
+      let dummy = DummyNetwork()
+      dummy.fetchTrending(mediaType: .movie, timeWindow: .week) { response in
+         switch response {
+         case .failure(let error):
+            XCTFail("Expected to be a success but got a failure with \(error)")
+         case .success(let trending):
+            XCTAssertNotNil(trending.results, "Not nil")
+         }
+      }
       
-//      let endpoint = Endpoint.movie(withId: 10)
-      
-      
-      
-//      let networkManager = NetworkManager()
-//      XCTAssertNotNil(networkManager.apiKey, "API key must not be nil")
-//      XCTAssert(networkManager.apiKey != "", "API key must have a value.")
-      
+      dummy.fetchMedia(.movie, byId: 581726) { (response:Result<Movie,NSBError>) in
+         switch response {
+         case .failure(let error):
+            XCTFail("Expected to be a success but got a failure with \(error)")
+         case .success(let movie):
+            XCTAssertNotNil(movie, "Not nil")
+         }
+      }
       
    }
 }
