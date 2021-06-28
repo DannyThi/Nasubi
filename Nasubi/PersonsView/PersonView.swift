@@ -92,9 +92,14 @@ struct PersonView: View {
                .foregroundColor(Color(.label))
                .padding(.vertical, 8)
                .multilineTextAlignment(.center)
-            
             Spacer()
          }
+         
+         TitleDetailView { Text("Date of Birth") } detail: { Text(viewModel.birthday) }
+         if viewModel.deathDay != nil {
+            TitleDetailView { Text("Death of Death") } detail: { Text(viewModel.deathDay) }
+         }
+
       }
    }
 }

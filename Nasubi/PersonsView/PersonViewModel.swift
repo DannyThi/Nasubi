@@ -65,26 +65,33 @@ extension PersonViewModel {
    }
    
    var birthday: String {
-      person?.birthday ?? "-"
+      return person?.birthday != nil ? date(from: person!.birthday!) : "-"
    }
    
-   var deathDay: String {
-      person?.deathDay ?? "-"
+   var deathDay: String? {
+      return person?.deathDay != nil ? date(from: person!.deathDay!) : nil
    }
    
    var placeOfBirth: String {
       person?.placeOfBirth ?? "-"
    }
+   
+   var isAdult: Bool {
+      return person?.adult != nil ? person!.adult! : false
+   }
+   
+   private func date(from dateString: String) -> String {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "YYYY-MM-DD"
+      let date = formatter.date(from: dateString)!
+      formatter.dateStyle = .long
+      return formatter.string(from: date)
+   }
 }
 
 
-//let deathDay: String?
-//let placeOfBirth: String?
-//
+
 //let alsoKnownAs: [String]?
-//let adult: Bool?
 //let imdbId: String
 //let homepage: String?
 //let popularity: Double
-//
-//let profilePath: String?
