@@ -15,6 +15,10 @@ struct MovieView: View {
       self._viewModel = StateObject(wrappedValue: .init(movieId: movieId))
    }
    
+   init(movie: Movie) {
+      self._viewModel = StateObject(wrappedValue: .init(dummyData: movie))
+   }
+   
    var body: some View {
       Group {
          if viewModel.movie != nil {
@@ -41,7 +45,7 @@ struct MovieView: View {
          }
       }
       .onAppear {
-         
+         viewModel.fetch()
       }
    }
    
@@ -193,7 +197,7 @@ extension MovieView {
 }
 
 struct ContentView_Previews: PreviewProvider {
-   
+   #warning("use example")
    static var previews: some View {
       NavigationView {
          MovieView(movieId: 615457)

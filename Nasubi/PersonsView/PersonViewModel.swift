@@ -19,6 +19,16 @@ class PersonViewModel: ObservableObject {
       self.personId = personId
    }
    
+   init(dummyData person: Person) {
+      self.personId = person.id
+      self.person = person
+      fetch()
+   }
+   
+   func fetch() {
+      network.fetchMedia(.person, byId: personId, completion: { self.handle(response: $0)})
+   }
+   
    func handle(response: Result<Person,NSBError>, completion: ((Person) -> Void)? = nil ) {
       DispatchQueue.main.async {
          switch response {
@@ -27,7 +37,7 @@ class PersonViewModel: ObservableObject {
          case let .success(person):
             self.person = person
             completion?(person)
-            print("Handled response successfully")
+//            print("Handled response successfully")
          }
       }
    }
@@ -46,20 +56,28 @@ extension PersonViewModel {
       return person?.gender?.title ?? "-"
    }
    
-   var knownForDepartment: String {
+   var knownFor: String {
       person?.knownForDepartment ?? "-"
    }
    
    var biography: String {
       person?.biography ?? "-"
    }
+   
+   var birthday: String {
+      person?.birthday ?? "-"
+   }
+   
+   var deathDay: String {
+      person?.deathDay ?? "-"
+   }
+   
+   var placeOfBirth: String {
+      person?.placeOfBirth ?? "-"
+   }
 }
 
-//let knownForDepartment: String
-//
-//let biography: String?
-//
-//let birthday: String?
+
 //let deathDay: String?
 //let placeOfBirth: String?
 //

@@ -47,6 +47,24 @@ class Networking: BaseNetwork, NetworkProtocol {
          }
       }
    }
+   
+   func fetchImage(imagePath: String?, completion: @escaping (Data) -> Void) {
+      guard let imagePath = imagePath, let url = URL(string: imagePath) else {
+         print("no image")
+         return
+      }
+      
+      URLSession.shared.dataTask(with: url) { data, _, error in
+         DispatchQueue.main.async {
+            guard let imageData = data else {
+               print(error!.localizedDescription)
+               return
+            }
+            completion(imageData)
+         }
+      }
+      .resume()
+   }
 }
 
 

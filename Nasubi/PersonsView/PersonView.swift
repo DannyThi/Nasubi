@@ -15,17 +15,26 @@ struct PersonView: View {
       self._viewModel = StateObject(wrappedValue: PersonViewModel(personId: personId))
    }
    
+   init(person: Person) {
+      self._viewModel = StateObject(wrappedValue: PersonViewModel(dummyData: person))
+   }
+   
    var body: some View {
       Group {
-         if let person = viewModel.person {
+         if viewModel.person != nil {
             ScrollView(.vertical) {
                ProfileView
+                  .padding(.top, 16)
+               Divider()
+               DetailsView
+               
             }
          } else {
             Text("No Person")
          }
       }
       .padding(.horizontal)
+      .navigationBarTitleDisplayMode(.inline)
       .navigationBarBackButtonHidden(true)
       .toolbar {
          ToolbarItem(placement: .navigationBarLeading) {
@@ -37,8 +46,9 @@ struct PersonView: View {
             }
             .accentColor(.white)
          }
-      }.onAppear {
-         
+      }
+      .onAppear {
+         viewModel.fetch()
       }
    }
    
@@ -47,29 +57,55 @@ struct PersonView: View {
          HStack(alignment: .top, spacing: 15) {
             AsyncImageView(imageEndPoint: .profile(path: viewModel.profilePath, size: .w185))
                .scaledToFit()
-               .frame(maxWidth: 160, alignment: .top)
+               .frame(maxWidth: 130, alignment: .top)
                .cornerRadius(15)
                .clipped()
             
-            VStack {
+            VStack(alignment: .leading) {
                Text(viewModel.name)
                   .font(.title2)
                   .fontWeight(.semibold)
-               Text(viewModel.biography)
+               
+               Text(viewModel.placeOfBirth)
+                  .font(.caption2)
+                  .foregroundColor(Color(.systemGray))
+                  .lineLimit(1)
+                  .padding(.bottom, 4)
+
+               NavigationLink(destination: Text(viewModel.biography)) {
+                  Text(viewModel.biography)
+                     .foregroundColor(.primary)
+                     .lineLimit(7)
+               }
             }
+         }
+         Spacer()
+      }
+   }
+   
+   var DetailsView: some View {
+      VStack {
+         HStack {
+            Text("Details")
+               .font(.title)
+               .fontWeight(.bold)
+               .foregroundColor(Color(.label))
+               .padding(.vertical, 8)
+               .multilineTextAlignment(.center)
             
             Spacer()
          }
-         
-         Spacer()
       }
    }
 }
 
 struct PersonsView_Previews: PreviewProvider {
+   
+   static let example = Person.example
+   
    static var previews: some View {
       NavigationView {
-         PersonView(personId: 287)
+         PersonView(person: example)
       }
       .preferredColorScheme(.dark)
    }

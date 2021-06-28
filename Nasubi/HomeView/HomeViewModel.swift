@@ -13,10 +13,6 @@ class HomeViewModel: ObservableObject {
    @Published var trending: Set<Trending.MediaItem> = []
    @Published var timeWindow: Trending.TimeWindow = .week
    
-   init() {
-      fetch()
-   }
-   
    func fetch() {
       network.fetchTrending(mediaType: .movie, timeWindow: timeWindow, completion: { self.handle($0) })
       network.fetchTrending(mediaType: .tv, timeWindow: timeWindow, completion: { self.handle($0) })

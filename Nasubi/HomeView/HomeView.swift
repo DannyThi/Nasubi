@@ -33,9 +33,11 @@ struct HomeView: View {
                   .imageScale(.large)
             }
          }
+         .onAppear {
+            viewModel.fetch()
+         }
       }
       .accentColor(.white)
-
    }
    
    var Movies: some View {

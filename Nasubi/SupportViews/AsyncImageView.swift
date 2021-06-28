@@ -53,7 +53,7 @@ struct AsyncImageView: View {
 }
 
 final class ImageLoader: ObservableObject {
-   
+   private var network = NetworkDataSource.shared
    @Published var image: UIImage?
    var imagePath: URLStringPath?
    
@@ -64,19 +64,24 @@ final class ImageLoader: ObservableObject {
    }
    
    func load() {
-      guard let imagePath = imagePath,
-            let url = URL(string: imagePath) else { return }
-      
-      URLSession.shared.dataTask(with: url) { data, _, error in
-         DispatchQueue.main.async {
-            guard let imageData = data else {
-               print(error!.localizedDescription)
-               return
-            }
-            
-            self.image = UIImage(data: imageData)
-         }
+      network.fetchImage(imagePath: imagePath) { imageData in
+         self.image = UIImage(data: imageData)
       }
-      .resume()
    }
+//   func load() {
+//      guard let imagePath = imagePath,
+//            let url = URL(string: imagePath) else { return }
+//
+//      URLSession.shared.dataTask(with: url) { data, _, error in
+//         DispatchQueue.main.async {
+//            guard let imageData = data else {
+//               print(error!.localizedDescription)
+//               return
+//            }
+//
+//            self.image = UIImage(data: imageData)
+//         }
+//      }
+//      .resume()
+//   }
 }

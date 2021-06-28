@@ -5,7 +5,7 @@
 //  Created by Hai Long Danny Thi on 2021/06/25.
 //
 
-import Foundation
+import UIKit
 
 class DummyNetwork: BaseNetwork, NetworkProtocol {
    
@@ -61,5 +61,9 @@ class DummyNetwork: BaseNetwork, NetworkProtocol {
             completion(.failure(.decodeError(error.localizedDescription)))
          }
       }
+   }
+   
+   func fetchImage(imagePath: String?, completion: @escaping (Data) -> Void) {
+      
    }
 }

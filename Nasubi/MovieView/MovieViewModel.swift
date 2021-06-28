@@ -17,6 +17,11 @@ class MovieViewModel: ObservableObject {
    
    init(movieId: MovieId) {
       self.movieId = movieId
+   }
+   
+   init(dummyData movie: Movie) {
+      self.movieId = movie.id
+      self.movie = movie
       fetch()
    }
 

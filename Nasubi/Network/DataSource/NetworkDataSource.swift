@@ -20,4 +20,8 @@ class NetworkDataSource: BaseNetwork, NetworkProtocol {
    func fetchMedia<T>(_ type: MediaType, byId id: Int, completion: @escaping (Result<T, NSBError>) -> Void) where T : Decodable {
       dataSource?.fetchMedia(type, byId: id, completion: completion)
    }
+   
+   func fetchImage(imagePath: String?, completion: @escaping (Data) -> Void) {
+      dataSource?.fetchImage(imagePath: imagePath, completion: completion)
+   }
 }

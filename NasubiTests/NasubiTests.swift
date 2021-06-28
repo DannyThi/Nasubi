@@ -22,7 +22,7 @@ class NasubiTests: XCTestCase {
       XCTAssert(Endpoint.apikey != "", "API key must not be nil")
    }
    
-   private func testDummyNetwork() {
+   private func testDummyFetchTrending() {
       let dummy = DummyNetwork()
       dummy.fetchTrending(mediaType: .movie, timeWindow: .week) { response in
          switch response {
@@ -32,7 +32,11 @@ class NasubiTests: XCTestCase {
             XCTAssertNotNil(trending.results, "Not nil")
          }
       }
-      
+   }
+   
+   private func testDummyFetchMedia() {
+      let dummy = DummyNetwork()
+
       dummy.fetchMedia(.movie, byId: 581726) { (response:Result<Movie,NSBError>) in
          switch response {
          case .failure(let error):
@@ -41,6 +45,9 @@ class NasubiTests: XCTestCase {
             XCTAssertNotNil(movie, "Not nil")
          }
       }
-      
+   }
+   
+   private func testFetchImage() {
+      let dummy = DummyNetwork()
    }
 }
