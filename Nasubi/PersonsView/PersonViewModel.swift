@@ -44,41 +44,14 @@ class PersonViewModel: ObservableObject {
 }
 
 extension PersonViewModel {
-   var profilePath: String {
-      return person?.profilePath ?? ""
-   }
-   
-   var name: String {
-      return person?.name ?? "-"
-   }
-   
-   var gender: String {
-      return person?.gender?.title ?? "-"
-   }
-   
-   var knownFor: String {
-      person?.knownForDepartment ?? "-"
-   }
-   
-   var biography: String {
-      person?.biography ?? "-"
-   }
-   
-   var birthday: String {
-      return person?.birthday != nil ? date(from: person!.birthday!) : "-"
-   }
-   
-   var deathDay: String? {
-      return person?.deathDay != nil ? date(from: person!.deathDay!) : nil
-   }
-   
-   var placeOfBirth: String {
-      person?.placeOfBirth ?? "-"
-   }
-   
-   var isAdult: Bool {
-      return person?.adult != nil ? person!.adult! : false
-   }
+   var profilePath: String { person?.profilePath ?? "" }
+   var name: String { person?.name ?? "-" }
+   var gender: String { person?.gender?.title ?? "-" }
+   var knownFor: String { person?.knownForDepartment ?? "-" }
+   var biography: String { person?.biography ?? "-" }
+   var placeOfBirth: String { person?.placeOfBirth ?? "-" }
+   var birthday: String { person?.birthday != nil ? date(from: person!.birthday!) : "-" }
+   var deathDay: String? { person?.deathDay != nil ? date(from: person!.deathDay!) : nil }
    
    private func date(from dateString: String) -> String {
       let formatter = DateFormatter()
@@ -87,11 +60,9 @@ extension PersonViewModel {
       formatter.dateStyle = .long
       return formatter.string(from: date)
    }
+   
+   var isAdult: Bool { person?.adult != nil ? person!.adult! : false }
+   var alsoKnownAs: [String] { person?.alsoKnownAs != nil ? person!.alsoKnownAs! : ["-"] }
+   var imdbId: String { person?.imdbId ?? "-" }
+   var homePage: String { person?.homepage ?? "" }
 }
-
-
-
-//let alsoKnownAs: [String]?
-//let imdbId: String
-//let homepage: String?
-//let popularity: Double

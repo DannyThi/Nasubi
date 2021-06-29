@@ -36,19 +36,21 @@ struct PersonView: View {
       .padding(.horizontal)
       .navigationBarTitleDisplayMode(.inline)
       .navigationBarBackButtonHidden(true)
-      .toolbar {
-         ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-               presentationMode.wrappedValue.dismiss()
-            } label: {
-               Image(systemName: "chevron.left")
-                  .font(.system(size: 44, weight: .bold))
-            }
-            .accentColor(.white)
-         }
-      }
+      .toolbar { toolbarItems }
       .onAppear {
          viewModel.fetch()
+      }
+   }
+   
+   var toolbarItems: some ToolbarContent {
+      ToolbarItem(placement: .navigationBarLeading) {
+         Button {
+            presentationMode.wrappedValue.dismiss()
+         } label: {
+            Image(systemName: "chevron.left")
+               .font(.system(size: 44, weight: .bold))
+         }
+         .accentColor(.white)
       }
    }
    
@@ -95,11 +97,17 @@ struct PersonView: View {
             Spacer()
          }
          
+         // Birthday
          TitleDetailView { Text("Date of Birth") } detail: { Text(viewModel.birthday) }
-         if viewModel.deathDay != nil {
-            TitleDetailView { Text("Death of Death") } detail: { Text(viewModel.deathDay) }
+         
+         // Death Day
+         if let deathDay = viewModel.deathDay {
+            TitleDetailView { Text("Date of Death") } detail: { Text(deathDay) }
          }
-
+         
+         
+         
+         
       }
    }
 }

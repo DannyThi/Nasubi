@@ -20,17 +20,16 @@ extension Endpoint {
    }
    
    static func movie(withId id: MovieId) -> Self {
-      let queryItem = URLQueryItem(name: "language", value: "en-US")
-      return Endpoint(path: "movie/\(id)", queryItems: [queryItem])
-   }
-   static func person(withId id: PersonId) -> Self {
-      let queryItem = URLQueryItem(name: "language", value: "en-US")
-      return Endpoint(path: "person/\(id)", queryItems: [queryItem])
+      return Endpoint(path: "movie/\(id)")
    }
    
    static func tvShow(withId id: TVShowId) -> Self {
-      let queryItem = URLQueryItem(name: "language", value: "en-US")
-      return Endpoint(path: "tvshow/\(id)", queryItems: [queryItem])
+      return Endpoint(path: "tvshow/\(id)")
+   }
+   
+   static func person(withId id: PersonId) -> Self {
+      let queryItems = [URLQueryItem(name: "append_to_response", value: "movie_credits")]
+      return Endpoint(path: "person/\(id)", queryItems: queryItems)
    }
    
    static func trendingMedia(mediaType: Trending.MediaType, timeWindow: Trending.TimeWindow) -> Self {
@@ -46,7 +45,6 @@ struct Endpoint {
       }
       return key.trimmingCharacters(in: .whitespacesAndNewlines)
    }
-   
    private var path: String
    private var queryItems: [URLQueryItem]
    
@@ -74,6 +72,9 @@ struct Endpoint {
       }
       self.queryItems = newQueryItems
    }
+   
+   
 }
+
 
 
