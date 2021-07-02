@@ -38,6 +38,8 @@
 		978A03F126868480009507FA /* trending_movie_json.txt in Resources */ = {isa = PBXBuildFile; fileRef = 978A03ED26868480009507FA /* trending_movie_json.txt */; };
 		978A03F226868480009507FA /* trending_tv_json.txt in Resources */ = {isa = PBXBuildFile; fileRef = 978A03EE26868480009507FA /* trending_tv_json.txt */; };
 		978A03F52686FA59009507FA /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A03F42686FA59009507FA /* TextView.swift */; };
+		978A03F8268AEB57009507FA /* MovieCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A03F7268AEB57009507FA /* MovieCredits.swift */; };
+		978A03FA268AFE19009507FA /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A03F9268AFE19009507FA /* MediaCell.swift */; };
 		978D344426805B880036DDA1 /* TitleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D344326805B880036DDA1 /* TitleDetailView.swift */; };
 		978D34472683FB760036DDA1 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D34462683FB760036DDA1 /* PersonView.swift */; };
 		978D34492683FB940036DDA1 /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D34482683FB940036DDA1 /* PersonViewModel.swift */; };
@@ -92,6 +94,8 @@
 		978A03ED26868480009507FA /* trending_movie_json.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trending_movie_json.txt; sourceTree = "<group>"; };
 		978A03EE26868480009507FA /* trending_tv_json.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trending_tv_json.txt; sourceTree = "<group>"; };
 		978A03F42686FA59009507FA /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		978A03F7268AEB57009507FA /* MovieCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCredits.swift; sourceTree = "<group>"; };
+		978A03F9268AFE19009507FA /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
 		978D344326805B880036DDA1 /* TitleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailView.swift; sourceTree = "<group>"; };
 		978D34462683FB760036DDA1 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		978D34482683FB940036DDA1 /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 				975107742674612D00E69481 /* HorizontalScrollView.swift */,
 				978D344326805B880036DDA1 /* TitleDetailView.swift */,
 				978A03F42686FA59009507FA /* TextView.swift */,
+				978A03F9268AFE19009507FA /* MediaCell.swift */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 		9779B90F266DFDC4008FE873 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				978A03F6268AEB47009507FA /* MovieCredits */,
 				978A03F326868486009507FA /* DummyData */,
 				9731F59D2677360F001CF5D8 /* Trending */,
 				9779B8F4266D98B6008FE873 /* Movie.swift */,
@@ -274,6 +280,14 @@
 				978A03ED26868480009507FA /* trending_movie_json.txt */,
 			);
 			path = DummyData;
+			sourceTree = "<group>";
+		};
+		978A03F6268AEB47009507FA /* MovieCredits */ = {
+			isa = PBXGroup;
+			children = (
+				978A03F7268AEB57009507FA /* MovieCredits.swift */,
+			);
+			path = MovieCredits;
 			sourceTree = "<group>";
 		};
 		978D34452683FB4A0036DDA1 /* PersonsView */ = {
@@ -396,6 +410,7 @@
 				9779B9182671ACBB008FE873 /* Genre.swift in Sources */,
 				9779B91E26743C95008FE873 /* ImageEndPoint.swift in Sources */,
 				97D3E0FF2674589B0066FD30 /* TrendingMediaCell.swift in Sources */,
+				978A03FA268AFE19009507FA /* MediaCell.swift in Sources */,
 				9731F5A22677382F001CF5D8 /* MovieView.swift in Sources */,
 				9779B90E266DF643008FE873 /* NSBError.swift in Sources */,
 				9779B916266F9147008FE873 /* Trending.swift in Sources */,
@@ -404,6 +419,7 @@
 				9731F5A62679D06D001CF5D8 /* TrendingPersonCell.swift in Sources */,
 				978D344D268467740036DDA1 /* TVShow.swift in Sources */,
 				975107752674612D00E69481 /* HorizontalScrollView.swift in Sources */,
+				978A03F8268AEB57009507FA /* MovieCredits.swift in Sources */,
 				978A03E82685777B009507FA /* NetworkDataSource.swift in Sources */,
 				978A03E426857568009507FA /* DummyNetwork.swift in Sources */,
 				9779B8E8266D94F5008FE873 /* HomeView.swift in Sources */,

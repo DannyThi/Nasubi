@@ -15,10 +15,6 @@ struct PersonView: View {
       self._viewModel = StateObject(wrappedValue: PersonViewModel(personId: personId))
    }
    
-   init(person: Person) {
-      self._viewModel = StateObject(wrappedValue: PersonViewModel(dummyData: person))
-   }
-   
    var body: some View {
       Group {
          if viewModel.person != nil {
@@ -27,19 +23,19 @@ struct PersonView: View {
                   .padding(.top, 16)
                Divider()
                DetailsView
+               Divider()
+               MoviesScrollView
                
             }
          } else {
-            Text("No Person")
+            Text("Nothing here")
          }
       }
       .padding(.horizontal)
       .navigationBarTitleDisplayMode(.inline)
       .navigationBarBackButtonHidden(true)
       .toolbar { toolbarItems }
-      .onAppear {
-         viewModel.fetch()
-      }
+      .onAppear { viewModel.fetch() }
    }
    
    var toolbarItems: some ToolbarContent {
@@ -68,16 +64,18 @@ struct PersonView: View {
                   .font(.title2)
                   .fontWeight(.semibold)
                
-               Text(viewModel.placeOfBirth)
-                  .font(.caption2)
+               Text(viewModel.knownFor)
+                  .font(.body)
                   .foregroundColor(Color(.systemGray))
                   .lineLimit(1)
                   .padding(.bottom, 4)
 
                NavigationLink(destination: Text(viewModel.biography)) {
                   Text(viewModel.biography)
+                     .font(.system(size: 14))
+                     .fontWeight(.light)
                      .foregroundColor(.primary)
-                     .lineLimit(7)
+                     .lineLimit(8)
                }
             }
          }
@@ -86,7 +84,7 @@ struct PersonView: View {
    }
    
    var DetailsView: some View {
-      VStack {
+      VStack(spacing: 10) {
          HStack {
             Text("Details")
                .font(.title)
@@ -97,28 +95,35 @@ struct PersonView: View {
             Spacer()
          }
          
-         // Birthday
          TitleDetailView { Text("Date of Birth") } detail: { Text(viewModel.birthday) }
-         
-         // Death Day
          if let deathDay = viewModel.deathDay {
             TitleDetailView { Text("Date of Death") } detail: { Text(deathDay) }
          }
-         
-         
-         
-         
+         TitleDetailView { Text("Place of Birth") } detail: { Text(viewModel.placeOfBirth) }
+      }
+   }
+   
+   var MoviesScrollView: some View {
+      Group {
+         VStack(alignment: .leading) {
+            Text("Movies")
+               .font(.title)
+               .fontWeight(.semibold)
+            HorizontalScrollView {
+               ForEach(viewModel.movies, id: \.self) { mediaItem in
+                  MediaCell(mediaItem: Binding { mediaItem } set: { _ in })
+               }
+            }
+         }
       }
    }
 }
 
 struct PersonsView_Previews: PreviewProvider {
-   
-   static let example = Person.example
-   
+      
    static var previews: some View {
       NavigationView {
-         PersonView(person: example)
+         PersonView(personId: 287)
       }
       .preferredColorScheme(.dark)
    }

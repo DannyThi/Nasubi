@@ -46,8 +46,5 @@ class NasubiTests: XCTestCase {
          }
       }
    }
-   
-   private func testFetchImage() {
-      let dummy = DummyNetwork()
-   }
+
 }

@@ -59,22 +59,27 @@ struct Endpoint {
          preconditionFailure("Invalid URL components: \(components)")
       }
       
-//      print(url)
+      print(url)
       return url
    }
    
-   init(path: String, queryItems: [URLQueryItem] = []) {
+   init(path: String, queryItems: [URLQueryItem] = [], language: Language = .english_US) {
       self.path = path
       let key = URLQueryItem(name: "api_key", value: Self.apikey)
-      var newQueryItems = [key]
+      let language = URLQueryItem(name: "language", value: language.rawValue)
+      
+      var newQueryItems = [key,language]
+      
       for item in queryItems {
          newQueryItems.append(item)
       }
+      
       self.queryItems = newQueryItems
    }
-   
-   
 }
 
+enum Language: String {
+   case english_US = "en-US"
+}
 
 

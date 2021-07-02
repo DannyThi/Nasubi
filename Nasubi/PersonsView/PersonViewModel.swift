@@ -19,12 +19,6 @@ class PersonViewModel: ObservableObject {
       self.personId = personId
    }
    
-   init(dummyData person: Person) {
-      self.personId = person.id
-      self.person = person
-      fetch()
-   }
-   
    func fetch() {
       network.fetchMedia(.person, byId: personId, completion: { self.handle(response: $0)})
    }
@@ -46,8 +40,14 @@ class PersonViewModel: ObservableObject {
 extension PersonViewModel {
    var profilePath: String { person?.profilePath ?? "" }
    var name: String { person?.name ?? "-" }
-   var gender: String { person?.gender?.title ?? "-" }
-   var knownFor: String { person?.knownForDepartment ?? "-" }
+   
+   var knownFor: String {
+      if let person = person, person.knownForDepartment == "Acting" {
+         return person.gender == .female ? "Actress" : "Actor"
+      }
+      return person?.knownForDepartment ?? "-"
+   }
+   
    var biography: String { person?.biography ?? "-" }
    var placeOfBirth: String { person?.placeOfBirth ?? "-" }
    var birthday: String { person?.birthday != nil ? date(from: person!.birthday!) : "-" }
@@ -65,4 +65,14 @@ extension PersonViewModel {
    var alsoKnownAs: [String] { person?.alsoKnownAs != nil ? person!.alsoKnownAs! : ["-"] }
    var imdbId: String { person?.imdbId ?? "-" }
    var homePage: String { person?.homepage ?? "" }
+   
+   
+   var movies: [MediaCellItem] {
+      if let cast = person?.movieCredits?.cast {
+         return cast.map { MediaCellItem(posterPath: $0.posterPath ?? "", title: $0.title, subtitle: $0.character!)}
+      }
+      return []
+   }
+   
+
 }
