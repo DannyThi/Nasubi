@@ -17,10 +17,12 @@ struct TextView: UIViewRepresentable {
       textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
       textView.textAlignment = .justified
       textView.allowsEditingTextAttributes = false
+      textView.setContentOffset(.zero, animated: false)
       return textView
    }
    
    func updateUIView(_ uiView: UITextView, context: Context) {
       uiView.text = text
+      uiView.scrollRangeToVisible(NSMakeRange(0, 0))
    }
 }

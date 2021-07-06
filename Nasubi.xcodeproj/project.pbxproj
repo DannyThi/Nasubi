@@ -46,6 +46,7 @@
 		978D344B2683FBD50036DDA1 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D344A2683FBD50036DDA1 /* Person.swift */; };
 		978D344D268467740036DDA1 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D344C268467740036DDA1 /* TVShow.swift */; };
 		97D3E0FF2674589B0066FD30 /* TrendingMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D3E0FE2674589B0066FD30 /* TrendingMediaCell.swift */; };
+		97FB8EA126942C1E00FB1187 /* BioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FB8EA026942C1E00FB1187 /* BioView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		978D344A2683FBD50036DDA1 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		978D344C268467740036DDA1 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		97D3E0FE2674589B0066FD30 /* TrendingMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMediaCell.swift; sourceTree = "<group>"; };
+		97FB8EA026942C1E00FB1187 /* BioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 			children = (
 				978D34462683FB760036DDA1 /* PersonView.swift */,
 				978D34482683FB940036DDA1 /* PersonViewModel.swift */,
+				97FB8EA026942C1E00FB1187 /* BioView.swift */,
 			);
 			path = PersonsView;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				9731F5A4267738A2001CF5D8 /* MovieViewModel.swift in Sources */,
 				978A03E62685757F009507FA /* NetworkProtocol.swift in Sources */,
 				9731F59C26772B7D001CF5D8 /* Set+Insert.swift in Sources */,
+				97FB8EA126942C1E00FB1187 /* BioView.swift in Sources */,
 				9779B91A2672012C008FE873 /* AsyncImageView.swift in Sources */,
 				978D34492683FB940036DDA1 /* PersonViewModel.swift in Sources */,
 			);

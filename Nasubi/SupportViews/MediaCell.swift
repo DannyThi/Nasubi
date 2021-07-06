@@ -23,7 +23,7 @@ struct MediaCell: View {
    @Binding var mediaItem: MediaCellItemProtocol
    
    var body: some View {
-      VStack {
+      VStack() {
          // IMAGE
          
          AsyncImageView(imageEndPoint: .poster(path: mediaItem.posterPath, size: .w185))
@@ -31,6 +31,7 @@ struct MediaCell: View {
             .frame(width: 160, alignment: .top)
             .aspectRatio(0.669, contentMode: .fit)
             .cornerRadius(20)
+            .clipped()
          
          // TITLE
          HStack {
@@ -50,6 +51,7 @@ struct MediaCell: View {
                .lineLimit(2)
             Spacer()
          }
+         
          Spacer()
       }
       .frame(width: 160, height: 340)

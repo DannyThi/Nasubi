@@ -18,7 +18,7 @@ struct PersonView: View {
    var body: some View {
       Group {
          if viewModel.person != nil {
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators: false) {
                ProfileView
                   .padding(.top, 16)
                Divider()
@@ -70,7 +70,7 @@ struct PersonView: View {
                   .lineLimit(1)
                   .padding(.bottom, 4)
 
-               NavigationLink(destination: Text(viewModel.biography)) {
+               NavigationLink(destination: BioView(text: viewModel.biography)) {
                   Text(viewModel.biography)
                      .font(.system(size: 14))
                      .fontWeight(.light)
